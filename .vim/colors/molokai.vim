@@ -275,4 +275,3 @@ end
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
 set background=dark
 "Status API Training Shop Blog About Pricing
-
