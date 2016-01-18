@@ -81,7 +81,7 @@ nmap <F3> :NERDTreeMirror<CR>
 nmap <F3> :NERDTreeToggle<CR>
 
 "TagBar
-nmap <F8> :TagbarToggle<CR>
+nmap <F4> :TagbarToggle<CR>
 
 " vim-go settings
 let g:go_fmt_command = "goimports"
