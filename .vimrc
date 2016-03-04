@@ -9,7 +9,7 @@ set smartindent
 set smartcase
 filetype off
 colorscheme molokai
-
+set t_Co=256
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -28,12 +28,19 @@ Plugin 'scrooloose/nerdtree'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" YCM settings
-let g:ycm_key_list_select_completion = ['', '']
-let g:ycm_key_list_previous_completion = ['']
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+" remember the cursor last open
+"autocmd BufReadPost *
+"  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+"  \   exe "normal! g'\"" |
+"  \ endif
+
+"  YCM settings
+let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_key_list_select_completion = ['', '']
+"let g:ycm_key_list_previous_completion = ['']
+"let g:ycm_key_invoke_completion = '<C-Space>'
+"let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion = ['<Up>']
 
 " UltiSnips setting
 let g:UltiSnipsExpandTrigger="<C-tab>"
@@ -41,7 +48,7 @@ let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " set mapleader
-let mapleader = "/"
+let mapleader = ";"
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -61,18 +68,8 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>0 <Plug>AirlineSelectTab0
 
 " vim-go custom mappings
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>e <Plug>(go-rename)
+nmap <Leader>b :GoBuild<CR>
+nmap <Leader>r :GoRun<CR>
 
 " NERDTree
 nmap <F3> :NERDTreeMirror<CR>
