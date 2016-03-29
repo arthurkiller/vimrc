@@ -1,3 +1,4 @@
+set shell=/bin/bash
 set nu
 set hlsearch
 set incsearch
@@ -10,15 +11,17 @@ set smartcase
 filetype off
 colorscheme molokai
 set t_Co=256
+set backspace=indent,eol,start
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
@@ -29,13 +32,18 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " remember the cursor last open
-"autocmd BufReadPost *
-"  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-"  \   exe "normal! g'\"" |
-"  \ endif
+" ~~~
+if has("autocmd")
+autocmd BufReadPost * 
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal g'\"" |
+\ endif|
+\set viminfo='1000,f1,<500
+endif
 
 "  YCM settings
 let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1, 'golang':1 }
 "let g:ycm_key_list_select_completion = ['', '']
 "let g:ycm_key_list_previous_completion = ['']
 "let g:ycm_key_invoke_completion = '<C-Space>'
