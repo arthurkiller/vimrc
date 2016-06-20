@@ -8,10 +8,25 @@ set shiftwidth=4
 set tabstop=4
 set smartindent
 set smartcase
+set backspace=indent,eol,start
 filetype off
 colorscheme molokai
 set t_Co=256
-set backspace=indent,eol,start
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11 "config font for gvim ”for gvim
+"" unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
+"set backspace=indent,eol,start
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -32,7 +47,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " remember the cursor last open
-" ~~~
 if has("autocmd")
 autocmd BufReadPost * 
 \ if line("'\"") > 0 && line ("'\"") <= line("$") |

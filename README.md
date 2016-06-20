@@ -1,5 +1,5 @@
-this is mt personal VIMrc file
-use the molokai color scheme
-I have fixed a color when using molokai in Ubuntu this could cause u confused in VIM high light
-P.S.
-  this is use for golang develop
+This is my vimrc file and plugins
+
+ATTENTION this config is use for golang developer and I have added many pulgins in the git for convient.
+Maybe only you need is the vimrc file.
+hope it can help 
