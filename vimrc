@@ -45,13 +45,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 
-" vim markdown tools
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_emphasis_multiline = 0
-nmap <silent> <F5> <Plug>MarkdownPreview
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -64,6 +57,13 @@ autocmd BufReadPost *
 \ endif|
 \set viminfo='1000,f1,<500
 endif
+
+" vim markdown tools
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_emphasis_multiline = 0
+nmap <silent> <F5> <Plug>MarkdownPreview
 
 "  YCM settings
 let g:ycm_autoclose_preview_window_after_insertion = 1
