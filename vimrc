@@ -30,6 +30,7 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -64,11 +65,13 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let mapleader = ";"
 
 " vim-airline
-let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+let g:airline_theme="luna"
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 nmap <leader>j :bn<CR>
 nmap <leader>x :bdelete<CR>
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
