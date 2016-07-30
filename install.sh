@@ -2,7 +2,8 @@
 # this shell is used to install the vimrc file to your home dir automaticly
 # for more information , please mail me at arthurkiller21@gmail.com
 trap exit ERR
-cp -r vimrc ../.vimrc
+cp vimrc ../.vimrc
+cp vimrc.vundle ../.vimrc.vundle
 cp -r vim ../.vim
 
 cd ~/.vim/bundle 
