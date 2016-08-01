@@ -34,7 +34,7 @@ nmap <silent> <F5> <Plug>MarkdownPreview
 
 "  YCM settings
 let g:ycm_autoclose_preview_window_after_insertion = 1
-"nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " vim-airline
 set laststatus=2
