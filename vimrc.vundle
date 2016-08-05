@@ -22,6 +22,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'rizzatti/dash.vim'
 """""""""""""""""""""
 
 " All of your Plugins must be added before the following line
