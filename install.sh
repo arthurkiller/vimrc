@@ -3,7 +3,7 @@
 # for more information , please mail me at arthurkiller21@gmail.com
 trap exit ERR
 
-if [! -d ~/.vim]; then
+if [ ! -d "~/.vim" ]; then
     rm -rf ~/.vim 
 fi
 cp -r vim ../.vim
@@ -11,7 +11,7 @@ cp -r vim ../.vim
 cp vimrc ../.vimrc
 cp vimrc.vundle ../.vimrc.vundle
 
-if [! -d ~/.vim/bundle]; then
+if [ ! -d "~/.vim/bundle" ]; then
     mkdir ~/.vim/bundle
 fi
 
