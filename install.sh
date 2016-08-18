@@ -6,7 +6,8 @@ trap exit ERR
 if [ ! -d "$HOME/.vim" ]; then
     rm -rf $HOME/.vim 
 fi
-cp -r vim $HOME/.vim
+cp -r vim $HOME
+mv $HOME/vim .vim
 
 cp vimrc $HOME/.vimrc
 cp vimrc.vundle $HOME/.vimrc.vundle
