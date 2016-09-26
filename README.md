@@ -11,3 +11,6 @@
 * Maybe only you need is the vimrc file.
 
 * hope it can help!
+
+## TODO 
+add the tagbar support
