@@ -3,26 +3,21 @@
 # for more information , please mail me at arthurkiller21@gmail.com
 trap exit ERR
 
-<<<<<<< HEAD
-if [ ! -d "$HOME/.vim" ]
+if [ -d "$HOME/.vim" ]
 then
-    mkdir -rf $HOME/.vim
-else
     rm -rf $HOME/.vim
 fi
+
 cp -r vim $HOME
 mv $HOME/vim .vim
-
 cp vimrc $HOME/.vimrc
 cp vimrc.vundle $HOME/.vimrc.vundle
 
-<<<<<<< HEAD
-if [ ! -d "$HOME/.vim/bundle" ]
+if [ -d "$HOME/.vim/bundle" ]
 then
-    mkdir $HOME/.vim/bundle
-else
     rm -rf $HOME/.vim/bundle
 fi
+mkdir $HOME/.vim/bundle
 
 if [ $1 ]
 then 
