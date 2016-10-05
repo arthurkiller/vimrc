@@ -25,6 +25,9 @@ autocmd BufReadPost *
   \   exe "normal! g'\"" |
   \ endif
 
+" auto pair
+let g:AutoPairsFlyMode = 0
+
 " vim markdown tools
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
@@ -33,15 +36,16 @@ let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_emphasis_multiline = 0
 nmap <silent> <F5> <Plug>MarkdownPreview
 
-"  YCM settings
+" YCM settings
 nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_comments = 1
-
+let g:ycm_complete_mn_comments = 1
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 " vim-airline
 set laststatus=2
@@ -63,14 +67,17 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>0 <Plug>AirlineSelectTab0
 
 " vim-go custom mappings
-nmap <Leader>b :GoBuild<CR>
-nmap <Leader>r :GoRun<CR>
+nmap <leader>b :GoBuild<CR>
+nmap <leader>r :GoRun<CR>
 
 " NERDTree
 nmap <F3> :NERDTreeMirror<CR>
 nmap <F3> :NERDTreeToggle<CR>
 
-"TagBar
+" ctags
+nmap <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+" TagBar
 nmap <F4> :TagbarToggle<CR>
 
 " vim-go settings
