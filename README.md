@@ -1,16 +1,23 @@
 # My VIM Configuration
+This is my vimrc file and plugins
+Maybe only you need is the vimrc file, hope it can help!
 
-* This is my vimrc file and plugins
+## Feature
+* __ATTENTION__ this config is use for ___golang___ && ___C++___  developer 
 
-* __ATTENTION__ this config is use for ___golang___ developer 
+* Use the updated molokai theme which will make the {} easy to identify
 
-* Use the updated molokai theme which will make the {} easy to find
+* the YCM and Utilsnips has some conflict in shortcut .I have remove the Ultisnip support 
 
-* the YCM and Utilsnips has some conflict in shortcut .I have changed them
-
-* Maybe only you need is the vimrc file.
-
-* hope it can help!
+## Plugins
+* auto-pair
+* vim markdown tools
+* YCM 
+* vim-airline
+* vim-go 
+* NERDTree
+* ctags
+* TagBar
 
 ## TODO 
-add the tagbar support
+add the fully support for C/C++ && golang
