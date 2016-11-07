@@ -11,6 +11,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 """""""""""""""""""""
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-fugitive'
 Plugin 'plasticboy/vim-markdown'

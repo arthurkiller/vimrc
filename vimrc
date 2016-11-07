@@ -28,6 +28,11 @@ autocmd BufReadPost *
 " auto pair
 let g:AutoPairsFlyMode = 0
 
+" auto formater
+let g:autoformat_retab = 1
+let g:autoformat_remove_trailing_spaces = 0
+noremap <F8> :Autoformat<CR>
+
 " vim markdown tools
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
