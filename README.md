@@ -11,6 +11,7 @@ Maybe only you need is the vimrc file, hope it can help!
 
 ## Plugins
 * auto-pair
+* auto-format
 * vim markdown tools
 * YCM 
 * vim-airline
