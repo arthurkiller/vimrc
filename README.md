@@ -9,6 +9,8 @@ Maybe only you need is the vimrc file, hope it can help!
 
 * the YCM and Utilsnips has some conflict in shortcut .I have remove the Ultisnip support 
 
+* added the basic support for C++ STL
+
 ## Plugins
 * auto-pair
 * auto-format
@@ -19,6 +21,3 @@ Maybe only you need is the vimrc file, hope it can help!
 * NERDTree
 * ctags
 * TagBar
-
-## TODO 
-add the fully support for C/C++ && golang
