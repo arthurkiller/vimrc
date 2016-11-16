@@ -1,5 +1,6 @@
+" settings for vundle the vim plugin manager
 set shell=/bin/bash           " there are wired errors on Mac with fishshell
-set nocompatible              " be iMproved, required
+set nocompatible              " be improved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -10,6 +11,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+" Customed plugin at here
 """""""""""""""""""""
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'jiangmiao/auto-pairs'
@@ -30,6 +33,7 @@ Plugin 'rizzatti/dash.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -40,4 +44,3 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line

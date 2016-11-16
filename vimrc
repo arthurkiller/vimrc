@@ -1,3 +1,4 @@
+" loaded the vundle settings
 source ~/.vimrc.vundle
 
 set nu
@@ -5,35 +6,38 @@ set hlsearch
 set incsearch
 set nocompatible
 set expandtab
-set shiftwidth=4
-set tabstop=4
 set smartindent
 set smartcase
+set shiftwidth=4
+set tabstop=4
 set backspace=indent,eol,start
+set t_Co=256
 syntax on
 filetype on
 filetype indent on
+
+" choose your colorscheme
 colorscheme molokai
-set t_Co=256
 
 " set mapleader
 let mapleader = ";"
 
 " remember the cursor last open
+" if takes no effort, possible problem is that some files you DO NOT have access promession
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
   \   exe "normal! g'\"" |
   \ endif
 
-" auto pair
+" auto pair the symble
 let g:AutoPairsFlyMode = 0
 
-" auto formater
+" auto format code with extention name of file
 let g:autoformat_retab = 1
 let g:autoformat_remove_trailing_spaces = 0
 noremap <F8> :Autoformat<CR>
 
-" vim markdown tools
+" vim markdown preview tools
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 let g:vim_markdown_folding_disabled=1
@@ -49,16 +53,17 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_mn_comments = 1
+" setting the STL ycm path
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 
 " vim-airline
 set laststatus=2
+nmap <tab> :bn<CR>
+nmap <leader>x :bdelete<CR>
 let g:airline_theme="luna"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-nmap <tab> :bn<CR>
-nmap <leader>x :bdelete<CR>
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -80,6 +85,7 @@ nmap <F3> :NERDTreeMirror<CR>
 nmap <F3> :NERDTreeToggle<CR>
 
 " ctags
+" just for C++ code
 nmap <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " TagBar
@@ -87,4 +93,5 @@ nmap <F4> :TagbarToggle<CR>
 
 " vim-go settings
 let g:go_fmt_command = "goimports"
+let g:go_def_mode = "godef"
 au BufRead,BufNewFile *.go set filetype=go
