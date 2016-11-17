@@ -26,7 +26,7 @@ colorscheme molokai
 
 " set mapleader
 """""""""""""""""""
-let mapleader = ";"
+let mapleader=";"
 """""""""""""""""""
 
 " remember the cursor last open
@@ -40,38 +40,54 @@ autocmd BufReadPost *
 
 " auto pair the symble
 """""""""""""""""""
-let g:AutoPairsFlyMode = 0
+let g:AutoPairsFlyMode=0
 """""""""""""""""""
 
 " auto format code with extention name of file
 """""""""""""""""""
-let g:autoformat_retab = 1
-let g:autoformat_remove_trailing_spaces = 0
+let g:autoformat_retab=1
+let g:autoformat_remove_trailing_spaces=0
 noremap <F8> :Autoformat<CR>
 """""""""""""""""""
 
 " vim markdown preview tools
 """""""""""""""""""
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
-let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+let g:mkdp_path_to_chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_emphasis_multiline = 0
+let g:vim_markdown_toc_autofit=1
+let g:vim_markdown_emphasis_multiline=0
 nmap <silent> <F5> <Plug>MarkdownPreview
+"""""""""""""""""""
+
+" Syntastic
+"""""""""""""""""""
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol='!!'
+let g:syntastic_style_error_symbol='!!'
+let g:syntastic_warning_symbol='??'
+let g:syntastic_style_warning_symbol='??'
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=1
+let g:syntastic_aggregate_errors=1
 """""""""""""""""""
 
 " YCM settings
 """""""""""""""""""
 nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_mn_comments = 1
-" setting the STL ycm path
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
+let g:ycm_add_preview_to_completeopt=1
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_min_num_of_chars_for_completion=1
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_complete_mn_comments=1
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
+let g:ycm_enable_diagnostic_signs=1                           " enable/disable ycm diagnostic"
+let g:ycm_enable_diagnostic_highlighting=1                    " enable/disable ycm diagnostic helpheight"
+let g:ycm_register_as_syntastic_checker=1                     " enable/disable ycm as the Syntastic checker"
 """""""""""""""""""
 
 " vim-airline
@@ -80,9 +96,11 @@ set laststatus=2
 nmap <tab> :bn<CR>
 nmap <leader>x :bdelete<CR>
 let g:airline_theme="luna"
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_idx_mode=1
+let g:airline#extensions#tagbar#enabled=1
+let g:airline#extensions#ycm#enabled=1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -120,7 +138,8 @@ nmap <F4> :TagbarToggle<CR>
 
 " vim-go settings
 """""""""""""""""""
-let g:go_fmt_command = "goimports"
-let g:go_def_mode = "godef"
+let g:syntastic_go_checkers=['go']
+let g:go_fmt_command="goimports"
+let g:go_def_mode="godef"
 au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""
