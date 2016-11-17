@@ -30,12 +30,12 @@ let mapleader=";"
 """""""""""""""""""
 
 " remember the cursor last open
-" if takes no effort, possible problem is that some files you DO NOT have access promession
+" if takes no efforts, possible problem is that some files you DO NOT have access promession
 """""""""""""""""""
 autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   exe "normal! g'\"" |
+            \ endif
 """""""""""""""""""
 
 " auto pair the symble
@@ -62,6 +62,7 @@ nmap <silent> <F5> <Plug>MarkdownPreview
 
 " Syntastic
 """""""""""""""""""
+let g:syntastic_go_checkers=['go']
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='!!'
 let g:syntastic_style_error_symbol='!!'
@@ -69,25 +70,31 @@ let g:syntastic_warning_symbol='??'
 let g:syntastic_style_warning_symbol='??'
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=1
 let g:syntastic_aggregate_errors=1
 """""""""""""""""""
 
 " YCM settings
 """""""""""""""""""
-nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
+set completeopt-=preview
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_add_preview_to_completeopt=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_mn_comments=1
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
-let g:ycm_enable_diagnostic_signs=1                           " enable/disable ycm diagnostic"
-let g:ycm_enable_diagnostic_highlighting=1                    " enable/disable ycm diagnostic helpheight"
-let g:ycm_register_as_syntastic_checker=1                     " enable/disable ycm as the Syntastic checker"
+let g:ycm_enable_diagnostic_signs=1
+let g:ycm_enable_diagnostic_highlighting=1
+let g:ycm_register_as_syntastic_checker=1
+au bufread,bufnewfile *.c let g:ycm_global_ycm_extra_conf = '~/.vim/ycm-plugin/c/.ycm_extra_conf.py'
+au bufread,bufnewfile *.h,*.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf = '~/.vim/ycm-plugin/cpp/.ycm_extra_conf.py'
+if filereadable(".ycm_extra_conf.py")
+    let g:ycm_global_ycm_extra_conf = './.ycm_extra_conf.py'
+endif
+
 """""""""""""""""""
 
 " vim-airline
@@ -113,12 +120,6 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>0 <Plug>AirlineSelectTab0
 """""""""""""""""""
 
-" vim-go custom mappings
-"""""""""""""""""""
-nmap <leader>b :GoBuild<CR>
-nmap <leader>r :GoRun<CR>
-"""""""""""""""""""
-
 " NERDTree
 """""""""""""""""""
 nmap <F3> :NERDTreeMirror<CR>
@@ -138,8 +139,24 @@ nmap <F4> :TagbarToggle<CR>
 
 " vim-go settings
 """""""""""""""""""
-let g:syntastic_go_checkers=['go']
+let g:go_get_update=0
+let g:go_list_type="quickfix"
+let g:go_highlight_functions=1
+let g:go_highlight_methods=1
+let g:go_highlight_fields=1
+let g:go_highlight_types=1
+let g:go_highlight_operators=1
+let g:go_highlight_build_constraints=1
 let g:go_fmt_command="goimports"
-let g:go_def_mode="godef"
+let g:go_fmt_autosave=1
+let g:go_fmt_fail_silently=1
+let g:go_def_reuse_buffer=1
+let g:go_def_mode='godef'
+let g:go_template_autocreate=0
+nmap <leader>b :GoBuild<CR>
+nmap <leader>r :GoRun<CR>
+nmap <leader>install :GoInstall<CR>
+nmap <leader>vet :GoVet<CR>
+nmap <leader>lint :GoLint<CR>
 au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""
