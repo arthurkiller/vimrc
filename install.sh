@@ -57,5 +57,5 @@ then
    	git clone https://github.com/majutsushi/tagbar.git
    	git clone https://github.com/fatih/vim-go.git
    	(cd $HOME/.vim/bundle/YouCompleteMe/ && git submodule update --init --recursive \
-   	    && ./install.py --all)
+   	    && ./install.py --gocode-completer --clang-completer)
 fi
