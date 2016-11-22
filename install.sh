@@ -5,9 +5,9 @@ trap exit ERR
 if [ $1 == "-h" ] || [ $1 == "-help" ] || [ $1 == "--help" ]
 then
 	echo "USAGE:"
-	echo "	install				mean just update the .vim file"
+	echo "	install             mean you need install total pulgin"
+	echo "	install update	    mean just update the .vim file"
 	echo "	install -h			mean you wanna help"
-	echo "	install -init 			mean you need install total pulgin"
 	exit
 fi
 
@@ -44,7 +44,7 @@ cp -r vim $HOME/.vim
 echo update succeed 
 echo `date`
 
-if [ $1 == "-init" ]
+if [ $1 != "update" ]
 then
 	echo starting download the vundle pulgin
     mkdir $HOME/.vim/bundle && cd $HOME/.vim/bundle 
