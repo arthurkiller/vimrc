@@ -47,7 +47,7 @@ echo `date`
 if [ $1 == "-init" ]
 then
 	echo starting download the vundle pulgin
-    	cd $HOME/.vim/bundle 
+    mkdir $HOME/.vim/bundle && cd $HOME/.vim/bundle 
    	git clone https://github.com/gmarik/Vundle.vim.git
    	git clone https://github.com/tpope/vim-fugitive.git
    	git clone https://github.com/Valloric/YouCompleteMe.git
