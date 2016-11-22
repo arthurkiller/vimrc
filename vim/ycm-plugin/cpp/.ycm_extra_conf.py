@@ -35,10 +35,10 @@ import ycm_core
 # compilation database set (by default, one is not set).
 # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
 flags = [
+'-Wc++11-compat',
 '-Wall',
 '-Wextra',
 '-Werror',
-'-Wc++98-compat',
 '-Wno-long-long',
 '-Wno-variadic-macros',
 '-fexceptions',
@@ -47,6 +47,21 @@ flags = [
 '-std=c++11',
 '-x','c++',
 '-nostdinc++',
+
+# using for MAC OS
+'-isystem', '../BoostParts',
+# This path will only work on OS X, but extra paths that don't exist are not
+# harmful
+'-isystem', '/System/Library/Frameworks/Python.framework/Headers',
+'-isystem', '../llvm/include',
+'-isystem', '../llvm/tools/clang/include',
+'-I', '.',
+'-I', './ClangCompleter',
+'-isystem', './tests/gmock/gtest',
+'-isystem', './tests/gmock/gtest/include',
+'-isystem', './tests/gmock',
+'-isystem', './tests/gmock/include',
+
 #ubuntu centos
 '-isystem','/usr/include',
 #ubuntu
@@ -65,7 +80,6 @@ flags = [
 
 #personal
 '-I','.',
-
 ]
 
 
