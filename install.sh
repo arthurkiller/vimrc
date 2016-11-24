@@ -2,7 +2,9 @@
 # this shell is used to install the vimrc file to your home dir automaticly
 # for more information , please mail me at arthurkiller21@gmail.com
 trap exit ERR
-if [ $1 == "-h" ] || [ $1 == "-help" ] || [ $1 == "--help" ]
+pwd=`pwd`
+
+if [ "$1" == "-h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ]
 then
 	echo "USAGE:"
 	echo "	install             mean you need install total pulgin"
@@ -24,13 +26,13 @@ if [ -h $HOME/.vimrc ]
 then
 	rm $HOME/.vimrc
 fi
-ln -s vimrc $HOME/.vimrc
+ln -s $pwd/vimrc $HOME/.vimrc
 
 if [ -h $HOME/.vimrc.vundle ]
 then
 	rm $HOME/.vimrc.vundle
 fi
-ln -s vimrc.vundle $HOME/.vimrc.vundle 
+ln -s $pwd/vimrc.vundle $HOME/.vimrc.vundle 
 
 if [ -h "$HOME/.vim" ]
 then
@@ -40,11 +42,12 @@ if [ -d "$HOME/.vim" ]
 then
     rm -rf $HOME/.vim
 fi
-cp -r vim $HOME/.vim
+cp -r $pwd/vim $HOME/.vim
+
 echo update succeed 
 echo `date`
 
-if [ $1 != "update" ]
+if [ "$1" != "update" ]
 then
 	echo starting download the vundle pulgin
     mkdir $HOME/.vim/bundle && cd $HOME/.vim/bundle 
