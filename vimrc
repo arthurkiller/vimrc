@@ -94,7 +94,6 @@ au bufread,bufnewfile *.h,*.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf
 if filereadable(".ycm_extra_conf.py")
     let g:ycm_global_ycm_extra_conf = './.ycm_extra_conf.py'
 endif
-
 """""""""""""""""""
 
 " vim-airline
@@ -155,8 +154,10 @@ let g:go_def_mode='godef'
 let g:go_template_autocreate=0
 nmap <leader>b :GoBuild<CR>
 nmap <leader>r :GoRun<CR>
+nmap <leader>callstack :GoCallstack<CR>
 nmap <leader>install :GoInstall<CR>
 nmap <leader>vet :GoVet<CR>
 nmap <leader>lint :GoLint<CR>
+nmap <leader>qq :q<CR>
 au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""
