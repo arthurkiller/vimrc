@@ -57,7 +57,6 @@ then
     mkdir $HOME/.vim/bundle && cd $HOME/.vim/bundle 
    	git clone https://github.com/VundleVim/Vundle.vim.git
    	git clone https://github.com/tpope/vim-fugitive.git
-   	git clone https://github.com/Valloric/YouCompleteMe.git
    	git clone https://github.com/kien/ctrlp.vim.git
    	git clone https://github.com/scrooloose/nerdtree.git
    	git clone https://github.com/bling/vim-airline.git
@@ -68,8 +67,8 @@ then
     git clone https://github.com/jiangmiao/auto-pairs.git
     git clone https://github.com/plasticboy/vim-markdown.git
     git clone https://github.com/iamcco/markdown-preview.vim.git
-    git clone https://github.com/Valloric/YouCompleteMe.git
     git clone https://github.com/Shougo/vimproc.vim.git
+    git clone https://github.com/Valloric/YouCompleteMe.git
 
    	(cd $HOME/.vim/bundle/YouCompleteMe/ && git submodule update --init --recursive \
    	    && ./install.py --gocode-completer --clang-completer)
