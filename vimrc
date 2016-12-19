@@ -12,6 +12,8 @@ set shiftwidth=4
 set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
+"set clipboard=unnamed
+
 syntax on
 filetype on
 filetype indent on
@@ -69,10 +71,10 @@ let g:syntastic_style_error_symbol='!!'
 let g:syntastic_warning_symbol='??'
 let g:syntastic_style_warning_symbol='??'
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=1
 let g:syntastic_aggregate_errors=1
+let g:syntastic_auto_loc_list=0 "disable the quickfix window
 """""""""""""""""""
 
 " YCM settings
@@ -152,12 +154,12 @@ let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
 let g:go_def_mode='godef'
 let g:go_template_autocreate=0
+nnoremap <S-tab> :cclose <CR>
 nmap <leader>b :GoBuild<CR>
 nmap <leader>r :GoRun<CR>
-nmap <leader>callstack :GoCallstack<CR>
+nmap <leader>cs :GoCallstack<CR>
 nmap <leader>install :GoInstall<CR>
 nmap <leader>vet :GoVet<CR>
 nmap <leader>lint :GoLint<CR>
-nmap <leader>qq :q<CR>
 au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""

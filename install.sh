@@ -50,15 +50,27 @@ echo `date`
 if [ "$1" != "update" ]
 then
 	echo starting download the vundle pulgin
+    if [ -d "$HOME/.vim/bundle" ]
+    then
+        rm -rf $HOME/.vim/bundle
+    fi
     mkdir $HOME/.vim/bundle && cd $HOME/.vim/bundle 
-   	git clone https://github.com/gmarik/Vundle.vim.git
+   	git clone https://github.com/VundleVim/Vundle.vim.git
    	git clone https://github.com/tpope/vim-fugitive.git
    	git clone https://github.com/Valloric/YouCompleteMe.git
    	git clone https://github.com/kien/ctrlp.vim.git
    	git clone https://github.com/scrooloose/nerdtree.git
    	git clone https://github.com/bling/vim-airline.git
+    git clone https://github.com/vim-airline/vim-airline-themes.git
    	git clone https://github.com/majutsushi/tagbar.git
    	git clone https://github.com/fatih/vim-go.git
+    git clone https://github.com/Chiel92/vim-autoformat.git
+    git clone https://github.com/jiangmiao/auto-pairs.git
+    git clone https://github.com/plasticboy/vim-markdown.git
+    git clone https://github.com/iamcco/markdown-preview.vim.git
+    git clone https://github.com/Valloric/YouCompleteMe.git
+    git clone https://github.com/Shougo/vimproc.vim.git
+
    	(cd $HOME/.vim/bundle/YouCompleteMe/ && git submodule update --init --recursive \
    	    && ./install.py --gocode-completer --clang-completer)
 fi
