@@ -12,7 +12,14 @@ set shiftwidth=4
 set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
+set foldmethod=marker
 "set clipboard=unnamed
+
+" set for the code line up tool
+set list
+set lcs=tab:\|\ ,nbsp:%,trail:-
+highlight LeaderTab guifg=#666666
+match LeaderTab /^\t/"
 
 syntax on
 filetype on
