@@ -1,6 +1,8 @@
 " loaded the vundle settings
 source ~/.vimrc.vundle
 
+"""""""""""""""""""
+" vim global config
 set nu
 set hlsearch
 set incsearch
@@ -13,7 +15,12 @@ set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=marker
-"set clipboard=unnamed
+" set clipboard=unnamed
+nnoremap <S-tab> :cclose <CR>
+
+syntax on
+filetype on
+filetype indent on
 
 " set for the code line up tool
 set list
@@ -21,26 +28,14 @@ set lcs=tab:\|\ ,nbsp:%,trail:-
 highlight LeaderTab guifg=#666666
 match LeaderTab /^\t/"
 
-syntax on
-filetype on
-filetype indent on
-
 " choose your colorscheme
-" I also provided the solarized && luna Theme for you
-"""""""""""""""""""
 colorscheme molokai
-" colorscheme solarized 
-" colorscheme luna
-"""""""""""""""""""
 
 " set mapleader
-"""""""""""""""""""
 let mapleader=";"
-"""""""""""""""""""
 
 " remember the cursor last open
 " if takes no efforts, possible problem is that some files you DO NOT have access promession
-"""""""""""""""""""
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line ("'\"") <= line("$") |
             \   exe "normal! g'\"" |
@@ -54,8 +49,15 @@ let g:AutoPairsFlyMode=0
 
 " auto format code with extention name of file
 """""""""""""""""""
+let g:formatterpath = ['/usr/bin']
+let g:formatters_cpp = ['c']
+let g:formatters_c = ['c']
 let g:autoformat_retab=1
 let g:autoformat_remove_trailing_spaces=0
+let g:formatdef_c = '"astyle --style=google --indent=spaces=4 --indent-cases
+            \ --indent-namespaces --indent-modifiers --indent-labels --indent-switches
+            \ --indent-preproc-block --indent-preproc-define --break-blocks --pad-oper
+            \ --pad-comma --pad-header --delete-empty-lines --convert-tabs --add-brackets"'
 noremap <F8> :Autoformat<CR>
 """""""""""""""""""
 
@@ -103,6 +105,8 @@ au bufread,bufnewfile *.h,*.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf
 if filereadable(".ycm_extra_conf.py")
     let g:ycm_global_ycm_extra_conf = './.ycm_extra_conf.py'
 endif
+" need to creat a .ycm_extra_conf.py for each project
+" copy the global should be okay
 """""""""""""""""""
 
 " vim-airline
@@ -161,12 +165,11 @@ let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
 let g:go_def_mode='godef'
 let g:go_template_autocreate=0
-nnoremap <S-tab> :cclose <CR>
 nmap <leader>b :GoBuild<CR>
 nmap <leader>r :GoRun<CR>
+nmap <leader>t :GoTest<CR>
 nmap <leader>cs :GoCallstack<CR>
-nmap <leader>install :GoInstall<CR>
-nmap <leader>vet :GoVet<CR>
-nmap <leader>lint :GoLint<CR>
+nmap <leader>i :GoInstall<CR>
+nmap <leader>vet :GoMetaLinter<CR>
 au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""
