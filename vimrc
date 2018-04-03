@@ -15,6 +15,7 @@ set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=marker
+
 " set clipboard=unnamed
 nnoremap <S-tab> :cclose <CR>
 
@@ -49,16 +50,15 @@ let g:AutoPairsFlyMode=0
 
 " auto format code with extention name of file
 """""""""""""""""""
-let g:formatterpath = ['/usr/bin']
+let g:formatterpath = ['/usr/local/bin']
+" let g:autoformat_retab=0
+" let g:autoformat_remove_trailing_spaces=0
+" let g:autoformat_autoindent=0
 let g:formatters_cpp = ['c']
 let g:formatters_c = ['c']
-let g:autoformat_retab=1
-let g:autoformat_remove_trailing_spaces=0
-let g:formatdef_c = '"astyle --style=google --indent=spaces=4 --indent-cases
-            \ --indent-namespaces --indent-modifiers --indent-labels --indent-switches
-            \ --indent-preproc-block --indent-preproc-define --break-blocks --pad-oper
-            \ --pad-comma --pad-header --delete-empty-lines --convert-tabs --add-brackets"'
+let g:formatdef_c = '"astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header"'
 noremap <F8> :Autoformat<CR>
+au BufWrite *.c,*.cpp,*.h,*.hpp :Autoformat
 """""""""""""""""""
 
 " vim markdown preview tools
@@ -71,8 +71,9 @@ let g:vim_markdown_emphasis_multiline=0
 nmap <silent> <F5> <Plug>MarkdownPreview
 """""""""""""""""""
 
-" Syntastic
+" syntastic settings
 """""""""""""""""""
+let g:syntastic_debug=3
 let g:syntastic_go_checkers=['go']
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='!!'
@@ -80,10 +81,13 @@ let g:syntastic_style_error_symbol='!!'
 let g:syntastic_warning_symbol='??'
 let g:syntastic_style_warning_symbol='??'
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_check_on_open=0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq=1
 let g:syntastic_aggregate_errors=1
-let g:syntastic_auto_loc_list=0 "disable the quickfix window
+let g:syntastic_auto_loc_list=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 """""""""""""""""""
 
 " YCM settings
@@ -109,17 +113,19 @@ endif
 " copy the global should be okay
 """""""""""""""""""
 
-" vim-airline
+" vim-airline settings
 """""""""""""""""""
 set laststatus=2
 nmap <tab> :bn<CR>
 nmap <leader>x :bdelete<CR>
 let g:airline_theme="luna"
 let g:airline_powerline_fonts=1
+let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#tagbar#enabled=1
 let g:airline#extensions#ycm#enabled=1
+let g:airline#extensions#capslock#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode=1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -160,6 +166,7 @@ let g:go_highlight_types=1
 let g:go_highlight_operators=1
 let g:go_highlight_build_constraints=1
 let g:go_fmt_command="goimports"
+" let g:go_fmt_options = { \ 'gofmt': '-s', \ }
 let g:go_fmt_autosave=1
 let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
@@ -168,8 +175,14 @@ let g:go_template_autocreate=0
 nmap <leader>b :GoBuild<CR>
 nmap <leader>r :GoRun<CR>
 nmap <leader>t :GoTest<CR>
-nmap <leader>cs :GoCallstack<CR>
 nmap <leader>i :GoInstall<CR>
+nmap <leader>tag :GoAddTags<CR>
+nmap <leader>doc :GoDocBrowser<CR>
 nmap <leader>vet :GoMetaLinter<CR>
 au BufRead,BufNewFile *.go set filetype=go
+"""""""""""""""""""
+
+" capslock settings
+"""""""""""""""""""
+set statusline^=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
 """""""""""""""""""
