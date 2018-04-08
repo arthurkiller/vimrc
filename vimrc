@@ -73,7 +73,6 @@ nmap <silent> <F5> <Plug>MarkdownPreview
 
 " syntastic settings
 """""""""""""""""""
-let g:syntastic_debug=3
 let g:syntastic_go_checkers=['go']
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='!!'
@@ -147,7 +146,7 @@ nmap <F3> :NERDTreeToggle<CR>
 " ctags shortcut
 " just for C++ code
 """""""""""""""""""
-nmap <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" nmap <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 """""""""""""""""""
 
 " TagBar
@@ -166,7 +165,9 @@ let g:go_highlight_types=1
 let g:go_highlight_operators=1
 let g:go_highlight_build_constraints=1
 let g:go_fmt_command="goimports"
-" let g:go_fmt_options = { \ 'gofmt': '-s', \ }
+let g:go_fmt_options = {
+            \ 'gofmt': '-s',
+            \ }
 let g:go_fmt_autosave=1
 let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
