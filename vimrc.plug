@@ -1,0 +1,30 @@
+" settings for vundle the vim plugin manager
+set shell=/bin/bash           " there are wired errors on Mac with fishshell
+set nocompatible              " be improved, required
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Customed plugin at here
+"""""""""""""""""""""
+Plug 'Chiel92/vim-autoformat'
+Plug 'jiangmiao/auto-pairs', { 'tag': '*' }
+Plug 'plasticboy/vim-markdown', { 'tag': '*' }
+Plug 'iamcco/markdown-preview.vim', { 'tag': '*' }
+Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --gocode-completer --clang-completer' }
+Plug 'ludovicchabant/vim-gutentags', { 'tag': '*' }
+Plug 'bling/vim-airline', { 'tag': '*' }
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree', { 'tag': '*', 'on': 'NERDTreeToggle' }
+Plug 'w0rp/ale', { 'tag': '*' }
+Plug 'Yggdroot/LeaderF', { 'tag': '*', 'do': './install.sh' }
+Plug 'Shougo/vimproc.vim',{ 'tag': '*', 'do': 'make' }
+Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar', { 'tag': '*' }
+"""""""""""""""""""""
+
+" Initialize plugin system
+call plug#end()
