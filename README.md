@@ -3,24 +3,25 @@ This is my vimrc file and plugins
 Maybe only you need is the vimrc file, hope it can help!
 
 ## Feature
-* __ATTENTION__ this config is use for ___golang___ && ___C++/C___  developer 
+* NEW: totally updated new version!
 
 * Use the updated molokai theme which will make the {} easy to identify
 
-* the YCM and Utilsnips has some conflict in shortcut .I have removed the Ultisnip support 
-
-* added the support for C++ STL You can use ___gd___ to jump the code
-
-* syntastic can help find synetx error on-the-fly
+* ale can help find synetx error on-the-fly
 
 ## Plugins
-* auto-pair
-* auto-format
-* vim markdown tools
-* YCM 
-* vim-airline
-* vim-go 
-* NERDTree
-* ctags
-* TagBar
-* syntastic
+* Chiel92/vim-autoformat'
+* jiangmiao/auto-pairs'
+* plasticboy/vim-markdown'
+* iamcco/markdown-preview.vim'
+* fatih/vim-go'
+* Valloric/YouCompleteMe'
+* ludovicchabant/vim-gutentags'
+* bling/vim-airline'
+* vim-airline/vim-airline-themes'
+* scrooloose/nerdtree'
+* w0rp/ale'
+* Yggdroot/LeaderF'
+* Shougo/vimproc.vim'
+* airblade/vim-gitgutter'
+* majutsushi/tagbar'
