@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""
 Plug 'Chiel92/vim-autoformat'
 Plug 'jiangmiao/auto-pairs', { 'tag': '*' }
-Plug 'plasticboy/vim-markdown', { 'tag': '*' }
+Plug 'godlygeek/tabular', { 'tag': '*' } | Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.vim', { 'tag': '*' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --gocode-completer --clang-completer' }

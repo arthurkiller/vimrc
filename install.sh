@@ -41,5 +41,9 @@ if [ -h "$HOME/.vim" ]
 then
     rm -rf $HOME/.vim
 fi
+mkdir -p $HOME/.vim/autoload
+ln -s $pwd/colors $HOME/.vim/colors
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo Done! `date`
