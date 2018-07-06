@@ -11,19 +11,21 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""
 Plug 'Chiel92/vim-autoformat'
 Plug 'jiangmiao/auto-pairs', { 'tag': '*' }
-Plug 'godlygeek/tabular', { 'tag': '*' } | Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown' | Plug 'godlygeek/tabular', { 'tag': '*' }
 Plug 'iamcco/markdown-preview.vim', { 'tag': '*' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --gocode-completer --clang-completer' }
 Plug 'ludovicchabant/vim-gutentags', { 'tag': '*' }
 Plug 'bling/vim-airline', { 'tag': '*' }
 Plug 'vim-airline/vim-airline-themes'
+Plug 'nathanaelkane/vim-indent-guides', { 'tag': '*' }
 Plug 'scrooloose/nerdtree', { 'tag': '*', 'on': 'NERDTreeToggle' }
 Plug 'w0rp/ale', { 'tag': '*' }
 Plug 'Yggdroot/LeaderF', { 'tag': '*', 'do': './install.sh' }
 Plug 'Shougo/vimproc.vim',{ 'tag': '*', 'do': 'make' }
 Plug 'airblade/vim-gitgutter'
-Plug 'majutsushi/tagbar', { 'tag': '*' }
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive', { 'tag': '*' }
 """""""""""""""""""""
 
 " Initialize plugin system
