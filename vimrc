@@ -1,6 +1,10 @@
 " loaded the vundle settings
 source ~/.vimrc.plug
 
+if has('python3')
+  silent! python3 1
+endif
+
 """""""""""""""""""
 " vim global config
 set nu
@@ -105,7 +109,7 @@ endif
 let g:ale_linters={'go': ['gofmt', 'go vet', 'gometalinter']}
 "let g:ale_linters={'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
 let g:ale_linters_explicit=1
-let g:ale_completion_delay=200
+let g:ale_completion_delay=100
 let g:ale_echo_delay=50
 let g:ale_lint_delay=200
 let g:ale_echo_msg_format='[%linter%] %code: %%s'
@@ -115,7 +119,7 @@ let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
 let g:ale_sign_error='!!'
 let g:ale_sign_warning='??'
-let g:ale_go_gometalinter_options='--fast -t --errors'
+let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
 let g:ale_go_gofmt_options='-s'
 let g:ale_c_gcc_options='-Wall -O2 -std=c99 -effective-c'
 let g:ale_cpp_gcc_options='-Wall -O2 -std=c++14'
