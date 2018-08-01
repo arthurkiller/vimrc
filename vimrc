@@ -1,6 +1,10 @@
 " loaded the vundle settings
 source ~/.vimrc.plug
 
+if has('python3')
+  silent! python3 1
+endif
+
 """""""""""""""""""
 " vim global config
 set nu
@@ -16,6 +20,7 @@ set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=marker
 set colorcolumn=100 
+set tags=./.tags;,.tags
 
 syntax on
 filetype on
@@ -87,13 +92,14 @@ let g:mkdp_path_to_chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Goog
 
 " vim-gutentags settings
 """""""""""""""""""
-let g:gutentags_project_root=['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_project_root=['Makefile', '.root', '.svn', '.git', '.hg', '.project']
 let g:gutentags_ctags_tagfile='.tags'
 let s:vim_tags=expand('~/.cache/tags')
 let g:gutentags_cache_dir=s:vim_tags
 let g:gutentags_ctags_extra_args=['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_auto_add_gtags_cscope = 0
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
@@ -105,7 +111,7 @@ endif
 let g:ale_linters={'go': ['gofmt', 'go vet', 'gometalinter']}
 "let g:ale_linters={'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
 let g:ale_linters_explicit=1
-let g:ale_completion_delay=200
+let g:ale_completion_delay=100
 let g:ale_echo_delay=50
 let g:ale_lint_delay=200
 let g:ale_echo_msg_format='[%linter%] %code: %%s'
@@ -115,7 +121,7 @@ let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
 let g:ale_sign_error='!!'
 let g:ale_sign_warning='??'
-let g:ale_go_gometalinter_options='--fast -t --errors'
+let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
 let g:ale_go_gofmt_options='-s'
 let g:ale_c_gcc_options='-Wall -O2 -std=c99 -effective-c'
 let g:ale_cpp_gcc_options='-Wall -O2 -std=c++14'
@@ -286,4 +292,15 @@ let g:Lf_NormalMap={
 		\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 		\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
 		\ }
+"""""""""""""""""""
+
+" vim-cpp-enhanced-highlight
+"""""""""""""""""""
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+let g:cpp_no_function_highlight = 1
 """""""""""""""""""
