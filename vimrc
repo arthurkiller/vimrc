@@ -53,7 +53,7 @@ let g:AutoPairsFlyMode=0
 """""""""""""""""""
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors=0
-nmap <leader>hide :IndentGuidesToggle<CR>
+nmap <silent> <leader>hide :IndentGuidesToggle<CR>
 hi IndentGuidesOdd  ctermbg=232
 hi IndentGuidesEven ctermbg=233
 """""""""""""""""""
@@ -65,7 +65,7 @@ let g:formatterpath=['/usr/local/bin']
 let g:formatters_cpp=['c']
 let g:formatters_c=['c']
 let g:formatdef_c='"astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header"'
-noremap <F8> :Autoformat<CR>
+noremap <silent> <F8> :Autoformat<CR>
 au BufWrite *.c,*.cpp,*.h,*.hpp :Autoformat
 """""""""""""""""""
 
@@ -107,10 +107,23 @@ endif
 
 " ale settings
 """""""""""""""""""
-"let g:ale_linters={'go': ['gofmt', 'go vet']}
-let g:ale_linters={'go': ['gofmt', 'go vet', 'gometalinter']}
-"let g:ale_linters={'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
+nmap <silent> <leader>d :ALEDetail<CR>
+nmap <silent> sn <Plug>(ale_next_wrap)
+nmap <silent> sp <Plug>(ale_previous_wrap)
+let g:ale_linters={
+\   'go': ['gofmt', 'go vet', 'gometalinter'],
+\   'c': ['clang'],
+\   'c++': ['clang'],
+\   'python': ['flake8', 'mypy', 'pylint'],
+\   'rust': ['cargo'],
+\   'zsh': ['shell'],
+\   'csh': ['shell'],
+\}
+"\'go': ['gofmt', 'go vet'],
+"\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
 let g:ale_linters_explicit=1
+let g:ale_sign_error='✗✗'
+let g:ale_sign_warning='??'
 let g:ale_completion_delay=100
 let g:ale_echo_delay=50
 let g:ale_lint_delay=200
@@ -119,12 +132,10 @@ let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
-let g:ale_sign_error='!!'
-let g:ale_sign_warning='??'
 let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
 let g:ale_go_gofmt_options='-s'
 let g:ale_c_gcc_options='-Wall -O2 -std=c99 -effective-c'
-let g:ale_cpp_gcc_options='-Wall -O2 -std=c++14'
+let g:ale_cpp_gcc_options='-Wall -O2 -std=c++14 -effective-cpp'
 let g:ale_c_cppcheck_options=''
 let g:ale_cpp_cppcheck_options=''
 """""""""""""""""""
@@ -171,50 +182,49 @@ endif
 " vim-airline settings
 """""""""""""""""""
 set laststatus=2
-nmap <tab> :bn<CR>
-nmap <leader>x :bdelete<CR>
+nmap <silent> <tab> :bn<CR>
+nmap <silent> <leader>x :bdelete<CR>
 let g:airline_theme="luna"
 let g:airline_powerline_fonts=1
-let g:airline#extensions#fugitiveline#enabled=1
 let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#ycm#enabled=1
-let g:airline#extensions#capslock#enabled=1
 let g:airline#extensions#tagbar#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>0 <Plug>AirlineSelectTab0
+let g:airline#extensions#fugitiveline#enabled=1
+nmap <silent> <leader>1 <Plug>AirlineSelectTab1
+nmap <silent> <leader>2 <Plug>AirlineSelectTab2
+nmap <silent> <leader>3 <Plug>AirlineSelectTab3
+nmap <silent> <leader>4 <Plug>AirlineSelectTab4
+nmap <silent> <leader>5 <Plug>AirlineSelectTab5
+nmap <silent> <leader>6 <Plug>AirlineSelectTab6
+nmap <silent> <leader>7 <Plug>AirlineSelectTab7
+nmap <silent> <leader>8 <Plug>AirlineSelectTab8
+nmap <silent> <leader>9 <Plug>AirlineSelectTab9
+nmap <silent> <leader>0 <Plug>AirlineSelectTab0
 """""""""""""""""""
 
 " NERDTree
 """""""""""""""""""
-nmap <F3> :NERDTreeMirror<CR>
-nmap <F3> :NERDTreeToggle<CR>
+nmap <silent> <F3> :NERDTreeMirror<CR>
+nmap <silent> <F3> :NERDTreeToggle<CR>
 """""""""""""""""""
 
 " TagBar
 """""""""""""""""""
-nmap <F4> :TagbarToggle<CR>
+nmap <silent> <F4> :TagbarToggle<CR>
 """""""""""""""""""
 
 " fugitive
 """""""""""""""""""
-nmap <leader>ba :Gblame<CR>
-nmap <leader>pull :Gpull<CR>
+nmap <silent> <leader>ba :Gblame<CR>
+nmap <silent> <leader>pull :Gpull<CR>
 """""""""""""""""""
 
 " gitgutter
 """""""""""""""""""
 let g:gitgutter_signs=0
-nmap <leader>g :GitGutterSignsToggle<CR>
+nmap <silent> <leader>g :GitGutterSignsToggle<CR>
 """""""""""""""""""
 
 " vim-go settings
@@ -245,20 +255,20 @@ let g:go_def_reuse_buffer=1
 let g:go_def_mode='guru'
 let g:go_template_autocreate=0
 "let g:go_guru_scope=["gitlab.meitu.com/platform/bifrost/..."]
-nmap <leader>b :GoBuild<CR>
-nmap <leader>r :GoRun<CR>
-nmap <leader>t :GoAddTags<CR>
-nmap <leader>i :GoInstall<CR>
-nmap <leader>v :GoMetaLinter<CR>
-nmap <leader>k :GoDescribe<CR>
-nmap <leader>s :GoCallstack<CR>
-nmap <leader>c :GoCallers<CR>
-nmap <leader>ce :GoCallees<CR>
-nmap <leader>key :GoKeyify<CR>
-nmap <leader>doc :GoDocBrowser<CR>
-nmap <leader>test :GoTest<CR>
-nmap <leader>peer :GoChannelPeers<CR>
-nmap <leader>free :GoFreevars<CR>
+nmap <silent> <leader>b :GoBuild<CR>
+nmap <silent> <leader>r :GoRun<CR>
+nmap <silent> <leader>t :GoAddTags<CR>
+nmap <silent> <leader>i :GoInstall<CR>
+nmap <silent> <leader>v :GoMetaLinter<CR>
+nmap <silent> <leader>k :GoDescribe<CR>
+nmap <silent> <leader>s :GoCallstack<CR>
+nmap <silent> <leader>c :GoCallers<CR>
+nmap <silent> <leader>ce :GoCallees<CR>
+nmap <silent> <leader>key :GoKeyify<CR>
+nmap <silent> <leader>doc :GoDocBrowser<CR>
+nmap <silent> <leader>test :GoTest<CR>
+nmap <silent> <leader>peer :GoChannelPeers<CR>
+nmap <silent> <leader>free :GoFreevars<CR>
 au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""
 
@@ -270,10 +280,10 @@ au BufRead,BufNewFile *.go set filetype=go
 """""""""""""""""""
 let g:Lf_ShortcutF='<c-p>'
 let g:Lf_ShortcutB='<c-n>'
-noremap <c-m> :LeaderfMru<CR>
-noremap <c-n> :LeaderfBuffer<CR>
-noremap <c-f> :LeaderfFunction<CR>
-noremap <c-t> :LeaderfTag<CR>
+noremap <silent> <c-m> :LeaderfMru<CR>
+noremap <silent> <c-n> :LeaderfBuffer<CR>
+noremap <silent> <c-f> :LeaderfFunction<CR>
+noremap <silent> <c-t> :LeaderfTag<CR>
 let g:Lf_StlSeparator={ 'left': '', 'right': '', 'font': '' }
 let g:Lf_RootMarkers=['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode='Ac'
@@ -296,11 +306,11 @@ let g:Lf_NormalMap={
 
 " vim-cpp-enhanced-highlight
 """""""""""""""""""
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-let g:cpp_no_function_highlight = 1
+let g:cpp_concepts_highlight=1
+let g:cpp_class_decl_highlight=1
+let g:cpp_no_function_highlight=1
+let g:cpp_class_scope_highlight=1
+let g:cpp_member_variable_highlight=1
+"let g:cpp_experimental_template_highlight = 1
+"let g:cpp_experimental_simple_template_highlight = 1
 """""""""""""""""""
