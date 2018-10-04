@@ -5,7 +5,7 @@ if has('python3')
   silent! python3 1
 endif
 
-"""""""""""""""""""
+"====================================="
 " vim global config
 set nu
 set hlsearch
@@ -20,21 +20,25 @@ set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=marker
 set colorcolumn=100 
+set maxmempattern=10000
 set tags=./.tags;,.tags
 
 syntax on
 filetype on
 filetype indent on
 
-" set clipboard=unnamed
+" set mapleader
+let mapleader=";"
+
+set clipboard=unnamed
+
 nnoremap <S-tab> :cclose <CR>
+nnoremap <leader>pa :set paste<CR>
+nnoremap <leader>nopa :set nopaste<CR>
 
 " choose your colorscheme
 colorscheme molokai
 hi ColorColumn ctermbg=232
-
-" set mapleader
-let mapleader=";"
 
 " remember the cursor last open
 " if takes no efforts, possible problem is that some files you DO NOT have access promession
@@ -42,35 +46,34 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
     \   exe "normal! g'\"" |
     \ endif
-"""""""""""""""""""
-
-" auto pair the symble
-"""""""""""""""""""
-let g:AutoPairsFlyMode=0
-"""""""""""""""""""
+"====================================="
 
 " vim ident
-"""""""""""""""""""
+"====================================="
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors=0
 nmap <silent> <leader>hide :IndentGuidesToggle<CR>
 hi IndentGuidesOdd  ctermbg=232
 hi IndentGuidesEven ctermbg=233
-"""""""""""""""""""
+"====================================="
 
+" auto pair the symble
+"====================================="
+let g:AutoPairsFlyMode=0
+"====================================="
 
 " auto format code with extention name of file
-"""""""""""""""""""
+"====================================="
 let g:formatterpath=['/usr/local/bin']
 let g:formatters_cpp=['c']
 let g:formatters_c=['c']
 let g:formatdef_c='"astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header"'
 noremap <silent> <F8> :Autoformat<CR>
 au BufWrite *.c,*.cpp,*.h,*.hpp :Autoformat
-"""""""""""""""""""
+"====================================="
 
 " vim markdown
-"""""""""""""""""""
+"====================================="
 set conceallevel=2
 let g:vim_markdown_math=1
 let g:vim_markdown_autowrite=1
@@ -82,16 +85,16 @@ let g:vim_markdown_toml_frontmatter=1
 let g:vim_markdown_json_frontmatter=1
 let g:vim_markdown_fenced_languages=['csharp=cs','golang=go','c++=cpp', 'viml=vim', 'bash=sh']
 let g:vim_markdown_emphasis_multiline=0
-"""""""""""""""""""
+"====================================="
 
 " markdown preview tools
-"""""""""""""""""""
+"====================================="
 nmap <silent> <F5> <Plug>MarkdownPreview
 let g:mkdp_path_to_chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
-"""""""""""""""""""
+"====================================="
 
 " vim-gutentags settings
-"""""""""""""""""""
+"====================================="
 let g:gutentags_project_root=['Makefile', '.root', '.svn', '.git', '.hg', '.project']
 let g:gutentags_ctags_tagfile='.tags'
 let s:vim_tags=expand('~/.cache/tags')
@@ -103,24 +106,24 @@ let g:gutentags_auto_add_gtags_cscope = 0
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
-"""""""""""""""""""
+"====================================="
 
 " ale settings
-"""""""""""""""""""
+"====================================="
 nmap <silent> <leader>d :ALEDetail<CR>
 nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
 let g:ale_linters={
-\   'go': ['gofmt', 'go vet', 'gometalinter'],
-\   'c': ['clang'],
-\   'c++': ['clang'],
-\   'python': ['flake8', 'mypy', 'pylint'],
+\   'go': ['gofmt', 'go vet'],
+\   'c': ['clang', 'gcc'],
+\   'c++': ['clang++', 'g++'],
+\   'python': ['flake8'],
 \   'rust': ['cargo'],
 \   'zsh': ['shell'],
 \   'csh': ['shell'],
 \}
-"\'go': ['gofmt', 'go vet'],
 "\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
+"\   'go': ['gofmt', 'go vet', 'gometalinter'],
 let g:ale_linters_explicit=1
 let g:ale_sign_error='✗✗'
 let g:ale_sign_warning='??'
@@ -134,22 +137,22 @@ let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
 let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
 let g:ale_go_gofmt_options='-s'
-let g:ale_c_gcc_options='-Wall -O2 -std=c99 -effective-c'
-let g:ale_cpp_gcc_options='-Wall -O2 -std=c++14 -effective-cpp'
-let g:ale_c_cppcheck_options=''
-let g:ale_cpp_cppcheck_options=''
-"""""""""""""""""""
+let g:ale_c_gcc_options='-Wall -O2'
+let g:ale_cpp_gcc_options='-Wall -O2 -std=gnu++17'
+let g:ale_c_cppcheck_options='-Wall -O2'
+let g:ale_cpp_cppcheck_options='-Wall -O2 -std=gnu++17'
+"====================================="
 
 " YCM settings
-"""""""""""""""""""
+"====================================="
 set completeopt-=preview
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_show_diagnostics_ui=0
 let g:ycm_key_invoke_completion='<c-x>'
 let g:ycm_add_preview_to_completeopt=1
 let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_min_num_of_chars_for_completion=3
-let g:ycm_min_num_identifier_candidate_chars=3
+let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_min_num_identifier_candidate_chars=2
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_collect_identifiers_from_comments_and_strings=1
 let g:ycm_collect_identifiers_from_tags_files=1
@@ -172,26 +175,32 @@ let g:ycm_filetype_whitelist={
     \}
 " need to creat a .ycm_extra_conf.py for each project
 " copy the global should be okay
-au bufread,bufnewfile *.c let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/c/.ycm_extra_conf.py'
-au bufread,bufnewfile *.h,*.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/cpp/.ycm_extra_conf.py'
+au bufread,bufnewfile *.c,*.h let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/c/.ycm_extra_conf.py'
+au bufread,bufnewfile *.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/cpp/.ycm_extra_conf.py'
 if filereadable(".ycm_extra_conf.py")
     let g:ycm_global_ycm_extra_conf='./.ycm_extra_conf.py'
 endif
-"""""""""""""""""""
+"====================================="
 
 " vim-airline settings
-"""""""""""""""""""
+"====================================="
 set laststatus=2
 nmap <silent> <tab> :bn<CR>
 nmap <silent> <leader>x :bdelete<CR>
 let g:airline_theme="luna"
 let g:airline_powerline_fonts=1
+let g:airline_detect_spelllang=0
+let g:airline_highlighting_cache=1
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'z', 'error', 'warning' ]
+    \ ]
 let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#ycm#enabled=1
 let g:airline#extensions#tagbar#enabled=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#fugitiveline#enabled=1
+let g:airline#extensions#tabline#buffer_idx_mode=1
 nmap <silent> <leader>1 <Plug>AirlineSelectTab1
 nmap <silent> <leader>2 <Plug>AirlineSelectTab2
 nmap <silent> <leader>3 <Plug>AirlineSelectTab3
@@ -202,33 +211,33 @@ nmap <silent> <leader>7 <Plug>AirlineSelectTab7
 nmap <silent> <leader>8 <Plug>AirlineSelectTab8
 nmap <silent> <leader>9 <Plug>AirlineSelectTab9
 nmap <silent> <leader>0 <Plug>AirlineSelectTab0
-"""""""""""""""""""
+"====================================="
 
 " NERDTree
-"""""""""""""""""""
+"====================================="
 nmap <silent> <F3> :NERDTreeMirror<CR>
 nmap <silent> <F3> :NERDTreeToggle<CR>
-"""""""""""""""""""
+"====================================="
 
 " TagBar
-"""""""""""""""""""
+"====================================="
 nmap <silent> <F4> :TagbarToggle<CR>
-"""""""""""""""""""
+"====================================="
 
 " fugitive
-"""""""""""""""""""
+"====================================="
 nmap <silent> <leader>ba :Gblame<CR>
 nmap <silent> <leader>pull :Gpull<CR>
-"""""""""""""""""""
+"====================================="
 
 " gitgutter
-"""""""""""""""""""
+"====================================="
 let g:gitgutter_signs=0
 nmap <silent> <leader>g :GitGutterSignsToggle<CR>
-"""""""""""""""""""
+"====================================="
 
 " vim-go settings
-"""""""""""""""""""
+"====================================="
 let g:go_get_update=0
 let g:go_list_height=7
 let g:go_list_autoclose=1
@@ -255,34 +264,32 @@ let g:go_def_reuse_buffer=1
 let g:go_def_mode='guru'
 let g:go_template_autocreate=0
 "let g:go_guru_scope=["gitlab.meitu.com/platform/bifrost/..."]
-nmap <silent> <leader>b :GoBuild<CR>
-nmap <silent> <leader>r :GoRun<CR>
-nmap <silent> <leader>t :GoAddTags<CR>
-nmap <silent> <leader>i :GoInstall<CR>
-nmap <silent> <leader>v :GoMetaLinter<CR>
-nmap <silent> <leader>k :GoDescribe<CR>
-nmap <silent> <leader>s :GoCallstack<CR>
-nmap <silent> <leader>c :GoCallers<CR>
-nmap <silent> <leader>ce :GoCallees<CR>
-nmap <silent> <leader>key :GoKeyify<CR>
-nmap <silent> <leader>doc :GoDocBrowser<CR>
-nmap <silent> <leader>test :GoTest<CR>
-nmap <silent> <leader>peer :GoChannelPeers<CR>
-nmap <silent> <leader>free :GoFreevars<CR>
+noremap <silent> <leader>b :GoBuild<CR>
+noremap <silent> <leader>r :GoRun<CR>
+noremap <silent> <leader>t :GoAddTags<CR>
+noremap <silent> <leader>i :GoInstall<CR>
+noremap <silent> <leader>v :GoMetaLinter<CR>
+noremap <silent> <leader>k :GoDescribe<CR>
+noremap <silent> <leader>s :GoCallstack<CR>
+noremap <silent> <leader>c :GoCallers<CR>
+noremap <silent> <leader>ce :GoCallees<CR>
+noremap <silent> <leader>key :GoKeyify<CR>
+noremap <silent> <leader>doc :GoDocBrowser<CR>
+noremap <silent> <leader>test :GoTest<CR>
+noremap <silent> <leader>peer :GoChannelPeers<CR>
+noremap <silent> <leader>free :GoFreevars<CR>
 au BufRead,BufNewFile *.go set filetype=go
-"""""""""""""""""""
+"====================================="
 
 " LeaderF settings
 "CTRL+P 在当前项目目录打开文件搜索
 "CTRL+M 打开 MRU搜索,搜索你最近打开的文件
 "CTRL+N 打开 Buffer 搜索
 "CTRL+F 打开函数搜索
-"""""""""""""""""""
-let g:Lf_ShortcutF='<c-p>'
-let g:Lf_ShortcutB='<c-n>'
-noremap <silent> <c-m> :LeaderfMru<CR>
-noremap <silent> <c-n> :LeaderfBuffer<CR>
-noremap <silent> <c-f> :LeaderfFunction<CR>
+"====================================="
+noremap <silent> <c-p> :LeaderfMru<CR>
+noremap <silent> <c-f> :LeaderfBuffer<CR>
+noremap <silent> <c-n> :LeaderfFunction<CR>
 noremap <silent> <c-t> :LeaderfTag<CR>
 let g:Lf_StlSeparator={ 'left': '', 'right': '', 'font': '' }
 let g:Lf_RootMarkers=['.project', '.root', '.svn', '.git']
@@ -294,18 +301,18 @@ let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
 let g:Lf_NormalMap={
 		\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>'],
-		\            ["<F6>", ':exec g:Lf_py "fileExplManager.quit()"<CR>'] ],
+		\   ["<F6>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
 		\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>'],
-		\            ["<F6>", ':exec g:Lf_py "bufExplManager.quit()"<CR>'] ],
+		\   ["<F6>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
 		\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
 		\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-		\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+		\ "Function":   [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 		\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
 		\ }
-"""""""""""""""""""
+"====================================="
 
 " vim-cpp-enhanced-highlight
-"""""""""""""""""""
+"====================================="
 let g:cpp_concepts_highlight=1
 let g:cpp_class_decl_highlight=1
 let g:cpp_no_function_highlight=1
@@ -313,4 +320,4 @@ let g:cpp_class_scope_highlight=1
 let g:cpp_member_variable_highlight=1
 "let g:cpp_experimental_template_highlight = 1
 "let g:cpp_experimental_simple_template_highlight = 1
-"""""""""""""""""""
+"====================================="

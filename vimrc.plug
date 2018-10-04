@@ -4,7 +4,7 @@ set nocompatible              " be improved, required
 call plug#begin('~/.vim/plugged')
 
 " Customed plugin at here
-"""""""""""""""""""""
+"=====================================
 Plug 'Chiel92/vim-autoformat'
 Plug 'jiangmiao/auto-pairs', { 'tag': '*' }
 Plug 'plasticboy/vim-markdown' | Plug 'godlygeek/tabular', { 'tag': '*' }
@@ -23,7 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'tag': '*' }
-"""""""""""""""""""""
+"=====================================
 
 " Initialize plugin system
 call plug#end()
