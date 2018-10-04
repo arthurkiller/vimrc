@@ -18,7 +18,7 @@ set shiftwidth=4
 set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
-set foldmethod=marker
+set foldmethod=manual
 set colorcolumn=100 
 set maxmempattern=10000
 set tags=./.tags;,.tags
@@ -115,8 +115,8 @@ nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
 let g:ale_linters={
 \   'go': ['gofmt', 'go vet'],
-\   'c': ['clang', 'gcc'],
-\   'c++': ['clang++', 'g++'],
+\   'c': ['gcc', 'clang'],
+\   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
 \   'python': ['flake8'],
 \   'rust': ['cargo'],
 \   'zsh': ['shell'],
@@ -125,22 +125,23 @@ let g:ale_linters={
 "\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
 "\   'go': ['gofmt', 'go vet', 'gometalinter'],
 let g:ale_linters_explicit=1
-let g:ale_sign_error='✗✗'
-let g:ale_sign_warning='??'
-let g:ale_completion_delay=100
-let g:ale_echo_delay=50
 let g:ale_lint_delay=200
-let g:ale_echo_msg_format='[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
+let g:ale_sign_error='✗✗'
+let g:ale_sign_warning='??'
+let g:ale_completion_enabled=1
+let g:ale_completion_delay=100
+let g:ale_echo_delay=50
+let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
 let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
 let g:ale_go_gofmt_options='-s'
 let g:ale_c_gcc_options='-Wall -O2'
-let g:ale_cpp_gcc_options='-Wall -O2 -std=gnu++17'
-let g:ale_c_cppcheck_options='-Wall -O2'
-let g:ale_cpp_cppcheck_options='-Wall -O2 -std=gnu++17'
+let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
+let g:ale_c_gcc_options='-Wall -O2'
+let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 "====================================="
 
 " YCM settings
