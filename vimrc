@@ -114,18 +114,18 @@ nmap <silent> <leader>d :ALEDetail<CR>
 nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
 let g:ale_linters={
-\   'go': ['gofmt', 'go vet'],
-\   'c': ['gcc', 'clang'],
-\   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
-\   'python': ['flake8'],
-\   'rust': ['cargo'],
-\   'zsh': ['shell'],
-\   'csh': ['shell'],
-\}
+    \   'c': ['gcc', 'clang'],
+    \   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
+    \   'csh': ['shell'],
+    \   'go': ['gofmt', 'go vet'],
+    \   'python': ['flake8'],
+    \   'proto': ['protoc-gen-lint'],
+    \   'rust': ['cargo', 'rls', 'rustc', 'rustfmt'],
+    \   'zsh': ['shell'],
+    \}
 "\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
-"\   'go': ['gofmt', 'go vet', 'gometalinter'],
 let g:ale_linters_explicit=1
-let g:ale_lint_delay=200
+let g:ale_lint_delay=100
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_lint_on_enter=1
@@ -145,6 +145,7 @@ let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 "====================================="
 
 " YCM settings
+" c-x trigger completion
 "====================================="
 set completeopt-=preview
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -164,7 +165,6 @@ let g:ycm_enable_diagnostic_signs=1
 let g:ycm_enable_diagnostic_highlighting=1
 let g:ycm_register_as_syntastic_checker=1
 set completeopt=menu,menuone
-" c-x trigger completion
 noremap <c-x> <NOP>
 let g:ycm_semantic_triggers= {
     \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{3}'],
@@ -174,7 +174,7 @@ let g:ycm_filetype_whitelist={
     \ "c":1, "cpp":1, "h":1, "hpp":1, "cc":1,
     \ "go":1, "rs":1, "sh":1, "py":1, "lua":1,
     \}
-" need to creat a .ycm_extra_conf.py for each project
+" if you need to creat a .ycm_extra_conf.py for each project
 " copy the global should be okay
 au bufread,bufnewfile *.c,*.h let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/c/.ycm_extra_conf.py'
 au bufread,bufnewfile *.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/cpp/.ycm_extra_conf.py'
@@ -223,6 +223,11 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 " TagBar
 "====================================="
 nmap <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_width=40
+let g:tagbar_autofocus=1
+let g:tagbar_compact=1
+let g:tagbar_autoclose=1
+let g:tagbar_autopreview=1
 "====================================="
 
 " fugitive
@@ -283,15 +288,9 @@ au BufRead,BufNewFile *.go set filetype=go
 "====================================="
 
 " LeaderF settings
-"CTRL+P 在当前项目目录打开文件搜索
-"CTRL+M 打开 MRU搜索,搜索你最近打开的文件
-"CTRL+N 打开 Buffer 搜索
-"CTRL+F 打开函数搜索
 "====================================="
-noremap <silent> <c-p> :LeaderfMru<CR>
-noremap <silent> <c-f> :LeaderfBuffer<CR>
-noremap <silent> <c-n> :LeaderfFunction<CR>
-noremap <silent> <c-t> :LeaderfTag<CR>
+noremap <silent> <c-p> :LeaderfMruCwd<CR>
+let g:Lf_ShortcutF = '<C-F>'
 let g:Lf_StlSeparator={ 'left': '', 'right': '', 'font': '' }
 let g:Lf_RootMarkers=['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode='Ac'
@@ -300,16 +299,6 @@ let g:Lf_CacheDirectory=expand('~/.vim/cache')
 let g:Lf_ShowRelativePath=0
 let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
-let g:Lf_NormalMap={
-		\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>'],
-		\   ["<F6>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-		\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>'],
-		\   ["<F6>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-		\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-		\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-		\ "Function":   [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-		\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-		\ }
 "====================================="
 
 " vim-cpp-enhanced-highlight
@@ -319,6 +308,9 @@ let g:cpp_class_decl_highlight=1
 let g:cpp_no_function_highlight=1
 let g:cpp_class_scope_highlight=1
 let g:cpp_member_variable_highlight=1
-"let g:cpp_experimental_template_highlight = 1
-"let g:cpp_experimental_simple_template_highlight = 1
+"====================================="
+
+" rust.vim 
+"====================================="
+let g:rustfmt_autosave=1
 "====================================="
