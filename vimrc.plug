@@ -24,7 +24,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'tag': '*' }
-Plug 'rust-lang/rust.vim', { 'tag': '*' }
+Plug 'rust-lang/rust.vim'
 "=====================================
 
 " Initialize plugin system
