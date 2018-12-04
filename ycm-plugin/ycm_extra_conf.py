@@ -29,46 +29,64 @@
 # For more information, please refer to <http://unlicense.org/>
 
 import os
+import redis
+import sys
 import ycm_core
 
-# These are the compilation flags that will be used in case there's no
-# compilation database set (by default, one is not set).
-# CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
-flags = [
-'-Wall',
-'-Wextra',
-'-Werror',
-'-Wc++98-c++11-compat',
-'-Wno-long-long',
-'-Wno-variadic-macros',
-'-fexceptions',
-'-DNDEBUG',
-'-DUSE_CLANG_COMPLETER',
-'-std=c++11',
-'-x','c++',
-'-nostdinc++',
-#mac os
-'-isystem', '/System/Library/Frameworks/Python.framework/Headers',
-#ubuntu centos
-'-isystem', '/usr/include',
-#ubuntu
-'-isystem', '/usr/include/x86_64-linux-gnu',
-#centos6
-'-isystem', '/usr/include/c++/4.4.4',
-#centos7
-'-isystem', '/usr/include/c++/4.8.2',
-#ubuntu14.04
-'-isystem', '/usr/include/c++/4.8',
-'-isystem', '/usr/include/x86_64-linux-gnu/c++/4.8',
-#ubuntu16.04
-'-isystem', '/usr/include/c++/5',
-'-isystem', '/usr/include/x86_64-linux-gnu/c++/5',
+##mac os
+##ubuntu centos
+#'-isystem', '/usr/include',
+##ubuntu
+#'-isystem', '/usr/include/x86_64-linux-gnu',
+##centos6
+#'-isystem', '/usr/include/c++/4.4.4',
+##centos7
+#'-isystem', '/usr/include/c++/4.8.2',
+##ubuntu14.04
+#'-isystem', '/usr/include/c++/4.8',
+#'-isystem', '/usr/include/x86_64-linux-gnu/c++/4.8',
+##ubuntu16.04
+#'-isystem', '/usr/include/c++/5',
+#'-isystem', '/usr/include/x86_64-linux-gnu/c++/5',
 #3rdparty
 
-#personal
-'-I','.',
+def Settings( **kwargs ):
+  language = kwargs[ 'language' ]
+  if language == 'cfamily':
+    return {
+      # These are the compilation flags that will be used in case there's no
+      # compilation database set (by default, one is not set).
+      # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
+      'flags': [
+      '-Wall',
+      '-Wextra',
+      '-Werror',
+      '-Wc++98-c++11-compat',
+      '-Wno-long-long',
+      '-Wno-variadic-macros',
+      '-fexceptions',
+      '-DNDEBUG',
+      '-DUSE_CLANG_COMPLETER',
+      '-std=c++11',
+      '-x','c++',
+      '-nostdinc++',
+      '-isystem', '/System/Library/Frameworks/Python.framework/Headers',
+      #personal
+      '-I','.',
+      ]
+    }
+  if language == 'python':
+    client_data = kwargs[ 'client_data' ]
+    return {
+      'interpreter_path': client_data[ 'g:ycm_python_interpreter_path' ],
+      'sys_path': client_data[ 'g:ycm_python_sys_path' ]
+    }
+  return {}
 
-]
+#def PythonSysPath( **kwargs ):
+#  sys_path = kwargs[ 'sys_path' ]
+#  sys_path.insert( 1, `pwd` )
+#  return sys_path
 
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
@@ -76,8 +94,7 @@ flags = [
 # more details: http://clang.llvm.org/docs/JSONCompilationDatabase.html
 #
 # You can get CMake to generate this file for you by adding:
-#   set( CMAKE_EXPORT_COMPILE_COMMANDS 1 )
-# to your CMakeLists.txt file.
+#   set( CMAKE_EXPORT_COMPILE_COMMANDS 1 ) # to your CMakeLists.txt file.
 #
 # Most projects will NOT need to set this to anything; you can just change the
 # 'flags' list of compilation flags. Notice that YCM itself uses that approach.
