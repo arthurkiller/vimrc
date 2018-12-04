@@ -1,11 +1,11 @@
 " loaded the vundle settings
 source ~/.vimrc.plug
 
+" slient python 3
 if has('python3')
   silent! python3 1
 endif
 
-"====================================="
 " vim global config
 set nu
 set hlsearch
@@ -14,6 +14,7 @@ set nocompatible
 set expandtab
 set smartindent
 set smartcase
+set encoding=utf-8
 set shiftwidth=4
 set tabstop=4
 set backspace=indent,eol,start
@@ -30,6 +31,7 @@ filetype indent on
 " set mapleader
 let mapleader=";"
 
+" set clipboard copy
 set clipboard=unnamed
 
 nnoremap <S-tab> :cclose <CR>
@@ -49,7 +51,6 @@ autocmd BufReadPost *
 "====================================="
 
 " vim ident
-"====================================="
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors=0
 nmap <silent> <leader>hide :IndentGuidesToggle<CR>
@@ -58,12 +59,10 @@ hi IndentGuidesEven ctermbg=233
 "====================================="
 
 " auto pair the symble
-"====================================="
 let g:AutoPairsFlyMode=0
 "====================================="
 
 " auto format code with extention name of file
-"====================================="
 let g:formatterpath=['/usr/local/bin']
 let g:formatters_cpp=['c']
 let g:formatters_c=['c']
@@ -73,8 +72,7 @@ au BufWrite *.c,*.cpp,*.h,*.hpp :Autoformat
 "====================================="
 
 " vim markdown
-"====================================="
-set conceallevel=2
+set conceallevel=0
 let g:vim_markdown_math=1
 let g:vim_markdown_autowrite=1
 let g:vim_markdown_toc_autofit=1
@@ -88,13 +86,11 @@ let g:vim_markdown_emphasis_multiline=0
 "====================================="
 
 " markdown preview tools
-"====================================="
 nmap <silent> <F5> <Plug>MarkdownPreview
 let g:mkdp_path_to_chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 "====================================="
 
 " vim-gutentags settings
-"====================================="
 let g:gutentags_project_root=['Makefile', '.root', '.svn', '.git', '.hg', '.project']
 let g:gutentags_ctags_tagfile='.tags'
 let s:vim_tags=expand('~/.cache/tags')
@@ -109,7 +105,6 @@ endif
 "====================================="
 
 " ale settings
-"====================================="
 nmap <silent> <leader>d :ALEDetail<CR>
 nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
@@ -118,11 +113,12 @@ let g:ale_linters={
     \   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
     \   'csh': ['shell'],
     \   'go': ['gofmt', 'go vet'],
-    \   'python': ['flake8'],
+    \   'python': ['flake8','autopep8'],
     \   'proto': ['protoc-gen-lint'],
     \   'rust': ['cargo', 'rls', 'rustc', 'rustfmt'],
     \   'zsh': ['shell'],
     \}
+" strict go linter
 "\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
 let g:ale_linters_explicit=1
 let g:ale_lint_delay=100
@@ -145,10 +141,12 @@ let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 "====================================="
 
 " YCM settings
-" c-x trigger completion
-"====================================="
-set completeopt-=preview
+"set completeopt-=preview
+set completeopt=menu,menuone
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_log_level = 'debug'
+let g:ycm_server_use_vim_stdout = 0
+let g:ycm_server_keep_logfiles = 1
 let g:ycm_show_diagnostics_ui=0
 let g:ycm_key_invoke_completion='<c-x>'
 let g:ycm_add_preview_to_completeopt=1
@@ -164,27 +162,37 @@ let g:ycm_confirm_extra_conf=0
 let g:ycm_enable_diagnostic_signs=1
 let g:ycm_enable_diagnostic_highlighting=1
 let g:ycm_register_as_syntastic_checker=1
-set completeopt=menu,menuone
+let g:ycm_python_interpreter_path = '/usr/local/bin/python'
+let g:ycm_python_sys_path = [
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python27.zip',
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7', 
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin', 
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac', 
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages', 
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk', 
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old', 
+  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload', 
+  \  '/usr/local/Cellar/protobuf/3.6.1.1/libexec/lib/python2.7/site-packages',
+  \  '/usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python37.zip',
+  \  '/usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python3.7', 
+  \  '/usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload', 
+  \  '/usr/local/lib/python2.7/site-packages',
+  \  '/usr/local/lib/python3.7/site-packages',
+  \  '/Users/arthur/Library/Python/2.7/lib/python/site-packages', 
+  \  '/Users/arthur/Library/Python/3.7/lib/python/site-packages' 
+  \]
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
 noremap <c-x> <NOP>
-let g:ycm_semantic_triggers= {
-    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{3}'],
-    \ 'cs,lua,javascript': ['re!\w{3}'],
-    \}
-let g:ycm_filetype_whitelist={
-    \ "c":1, "cpp":1, "h":1, "hpp":1, "cc":1,
-    \ "go":1, "rs":1, "sh":1, "py":1, "lua":1,
-    \}
-" if you need to creat a .ycm_extra_conf.py for each project
-" copy the global should be okay
-au bufread,bufnewfile *.c,*.h let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/c/.ycm_extra_conf.py'
-au bufread,bufnewfile *.hpp,*.cpp,*.cc,*.cxx let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/cpp/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/ycm_extra_conf.py'
 if filereadable(".ycm_extra_conf.py")
     let g:ycm_global_ycm_extra_conf='./.ycm_extra_conf.py'
 endif
 "====================================="
 
 " vim-airline settings
-"====================================="
 set laststatus=2
 nmap <silent> <tab> :bn<CR>
 nmap <silent> <leader>x :bdelete<CR>
@@ -215,14 +223,12 @@ nmap <silent> <leader>0 <Plug>AirlineSelectTab0
 "====================================="
 
 " NERDTree
-"====================================="
-nmap <silent> <F3> :NERDTreeMirror<CR>
-nmap <silent> <F3> :NERDTreeToggle<CR>
+nmap <silent> <F5> :NERDTreeMirror<CR>
+nmap <silent> <F5> :NERDTreeToggle<CR>
 "====================================="
 
 " TagBar
-"====================================="
-nmap <silent> <F4> :TagbarToggle<CR>
+nmap <silent> <F6> :TagbarToggle<CR>
 let g:tagbar_width=40
 let g:tagbar_compact=1
 let g:tagbar_autofocus=1
@@ -230,19 +236,16 @@ let g:tagbar_autoclose=1
 "====================================="
 
 " fugitive
-"====================================="
 nmap <silent> <leader>ba :Gblame<CR>
 nmap <silent> <leader>pull :Gpull<CR>
 "====================================="
 
 " gitgutter
-"====================================="
 let g:gitgutter_signs=0
 nmap <silent> <leader>g :GitGutterSignsToggle<CR>
 "====================================="
 
 " vim-go settings
-"====================================="
 let g:go_get_update=0
 let g:go_list_height=7
 let g:go_list_autoclose=1
@@ -268,7 +271,7 @@ let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
 let g:go_def_mode='guru'
 let g:go_template_autocreate=0
-"let g:go_guru_scope=["./."]
+let g:go_guru_scope=["/Users/arthur/golang/src/go.etcd.io/etcd"]
 noremap <silent> <leader>b :GoBuild<CR>
 noremap <silent> <leader>r :GoRun<CR>
 noremap <silent> <leader>t :GoAddTags<CR>
@@ -287,7 +290,6 @@ au BufRead,BufNewFile *.go set filetype=go
 "====================================="
 
 " LeaderF settings
-"====================================="
 noremap <silent> <c-p> :LeaderfMruCwd<CR>
 let g:Lf_ShortcutF = '<C-F>'
 let g:Lf_StlSeparator={ 'left': '', 'right': '', 'font': '' }
@@ -301,7 +303,6 @@ let g:Lf_StlColorscheme='powerline'
 "====================================="
 
 " vim-cpp-enhanced-highlight
-"====================================="
 let g:cpp_concepts_highlight=1
 let g:cpp_class_decl_highlight=1
 let g:cpp_no_function_highlight=1
@@ -310,6 +311,6 @@ let g:cpp_member_variable_highlight=1
 "====================================="
 
 " rust.vim 
-"====================================="
 let g:rustfmt_autosave=1
 "====================================="
+
