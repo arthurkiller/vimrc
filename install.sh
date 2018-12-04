@@ -7,8 +7,8 @@ pwd=`pwd`
 if [ "$1" == "-h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ]
 then
     echo "USAGE:"
-    echo "  install             mean you need install total pulgin"
-    echo "  install -h          mean you wanna help"
+    echo "  install             install pulgin"
+    echo "  install -h          show this help"
     exit
 fi
 
@@ -43,6 +43,7 @@ then
 fi
 mkdir -p $HOME/.vim/autoload
 ln -s $pwd/colors $HOME/.vim/colors
+ln -s $pwd/ycm-plugin $HOME/.vim/ycm-plugin
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
