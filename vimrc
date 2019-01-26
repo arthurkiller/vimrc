@@ -141,13 +141,13 @@ let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 "====================================="
 
 " YCM settings
-"set completeopt-=preview
+set completeopt-=preview
 set completeopt=menu,menuone
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_log_level = 'debug'
-let g:ycm_server_use_vim_stdout = 0
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_show_diagnostics_ui=0
+"let g:ycm_log_level = 'debug'
+"let g:ycm_server_use_vim_stdout = 0
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_show_diagnostics_ui=0
 let g:ycm_key_invoke_completion='<c-x>'
 let g:ycm_add_preview_to_completeopt=1
 let g:ycm_autoclose_preview_window_after_insertion=1
@@ -225,6 +225,7 @@ nmap <silent> <leader>0 <Plug>AirlineSelectTab0
 " NERDTree
 nmap <silent> <F5> :NERDTreeMirror<CR>
 nmap <silent> <F5> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "====================================="
 
 " TagBar
@@ -313,4 +314,3 @@ let g:cpp_member_variable_highlight=1
 " rust.vim 
 let g:rustfmt_autosave=1
 "====================================="
-

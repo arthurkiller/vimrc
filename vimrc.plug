@@ -6,24 +6,25 @@ call plug#begin('~/.vim/plugged')
 " Customed plugin at here
 "=====================================
 Plug 'Chiel92/vim-autoformat'
-Plug 'jiangmiao/auto-pairs', { 'tag': '*' }
-Plug 'plasticboy/vim-markdown' | Plug 'godlygeek/tabular', { 'tag': '*' }
-Plug 'iamcco/markdown-preview.vim', { 'tag': '*' }
-Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'plasticboy/vim-markdown' | Plug 'godlygeek/tabular'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'fatih/vim-go'
 Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && 
             \./install.py --gocode-completer --clang-completer --racer-completer' }
-Plug 'ludovicchabant/vim-gutentags', { 'tag': '*' }
-Plug 'bling/vim-airline', { 'tag': '*' }
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides', { 'tag': '*' }
-Plug 'scrooloose/nerdtree', { 'tag': '*', 'on': 'NERDTreeToggle' }
-Plug 'w0rp/ale', { 'tag': '*' }
-Plug 'Yggdroot/LeaderF', { 'tag': '*', 'do': './install.sh' }
-Plug 'Shougo/vimproc.vim',{ 'tag': '*', 'do': 'make' }
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'w0rp/ale'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-fugitive', { 'tag': '*' }
-Plug 'octol/vim-cpp-enhanced-highlight', { 'tag': '*' }
+Plug 'tpope/vim-fugitive'
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rust-lang/rust.vim'
 "=====================================
 
