@@ -272,7 +272,7 @@ let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
 let g:go_def_mode='guru'
 let g:go_template_autocreate=0
-let g:go_guru_scope=["/Users/arthur/golang/src/go.etcd.io/etcd"]
+let g:go_guru_scope=["go.etcd.io/etcd"]`
 noremap <silent> <leader>b :GoBuild<CR>
 noremap <silent> <leader>r :GoRun<CR>
 noremap <silent> <leader>t :GoAddTags<CR>

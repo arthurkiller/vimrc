@@ -4,10 +4,9 @@ Maybe only you need is the vimrc file, hope it can help!
 
 ## Feature
 * NEW: totally updated new version!
-
 * Use the updated molokai theme which will make the {} easy to identify
-
 * ale can help find synetx error on-the-fly
+* I have add the nerd font for ease ues
 
 ## Plugins
 * Chiel92/vim-autoformat: autoformat your code with astyle
