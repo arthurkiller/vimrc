@@ -23,13 +23,13 @@ function UpdateTitle()
 endfunction
 
 function AddTitle()
-    call append(0,"//*********************************************************")
-    call append(1,"//  Author        : arthur")
-    call append(2,"//  Email         : arthur@github.com")
-    call append(3,"//  Filename      : ".expand("%:t"))
-    call append(4,"//  Create time   : ".strftime("%Y-%m-%d %H:%M"))
-    call append(5,"//  Last modified : ".strftime("%Y-%m-%d %H:%M"))
-    call append(6,"//  Description   : do something.")
-    call append(7,"//*********************************************************")
+    call append(0,"/**********************************************************")
+    call append(1," *  Author        : arthur")
+    call append(2," *  Email         : arthur@github.com")
+    call append(3," *  Filename      : ".expand("%:t"))
+    call append(4," *  Create time   : ".strftime("%Y-%m-%d %H:%M"))
+    call append(5," *  Last modified : ".strftime("%Y-%m-%d %H:%M"))
+    call append(6," *  Description   : do something.")
+    call append(7," **********************************************************/")
     echohl WarningMsg | echo "Successful in adding the author information." | echohl None
 endfunction
