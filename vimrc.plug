@@ -11,7 +11,7 @@ Plug 'plasticboy/vim-markdown' | Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'fatih/vim-go'
 Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && 
-            \./install.py --gocode-completer --clang-completer --racer-completer' }
+            \./install.py --gocode-completer --clang-completer' }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'

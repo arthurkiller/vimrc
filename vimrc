@@ -1,5 +1,6 @@
 " loaded the vundle settings
 source ~/.vimrc.plug
+source ~/.vimrc.sign
 
 " slient python 3
 if has('python3')
@@ -28,19 +29,23 @@ syntax on
 filetype on
 filetype indent on
 
+" set colorscheme
+colorscheme molokai
+hi ColorColumn ctermbg=232
+
 " set mapleader
 let mapleader=";"
 
 " set clipboard copy
 set clipboard=unnamed
 
-nnoremap <S-tab> :cclose <CR>
-nnoremap <leader>pa :set paste<CR>
-nnoremap <leader>nopa :set nopaste<CR>
+" add title
+nmap <leader>aa :call AddAuthor()<CR>'S
 
-" choose your colorscheme
-colorscheme molokai
-hi ColorColumn ctermbg=232
+" set vim paset mode
+nnoremap <S-tab> :cclose <CR>
+nnoremap <leader>ps :set paste<CR>
+nnoremap <leader>nps :set nopaste<CR>
 
 " remember the cursor last open
 " if takes no efforts, possible problem is that some files you DO NOT have access promession
@@ -64,11 +69,12 @@ let g:AutoPairsFlyMode=0
 
 " auto format code with extention name of file
 let g:formatterpath=['/usr/local/bin']
-let g:formatters_cpp=['c']
-let g:formatters_c=['c']
-let g:formatdef_c='"astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header"'
+let g:formatdef_my_c='"astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header"'
+let g:formatters_cpp=['my_c']
+let g:formatters_c=['my_c']
+let g:formatter_yapf_style = 'pep8'
 noremap <silent> <F8> :Autoformat<CR>
-au BufWrite *.c,*.cpp,*.h,*.hpp :Autoformat
+au BufWrite *.c,*.cpp,*.h,*.hpp,*.py :Autoformat
 "====================================="
 
 " vim markdown
@@ -95,9 +101,7 @@ let g:gutentags_project_root=['Makefile', '.root', '.svn', '.git', '.hg', '.proj
 let g:gutentags_ctags_tagfile='.tags'
 let s:vim_tags=expand('~/.cache/tags')
 let g:gutentags_cache_dir=s:vim_tags
-let g:gutentags_ctags_extra_args=['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args=['--fields=+niazS', '--extra=+q', '--c++-kinds=+px', '--c-kinds=+px']
 let g:gutentags_auto_add_gtags_cscope = 0
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
@@ -113,13 +117,14 @@ let g:ale_linters={
     \   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
     \   'csh': ['shell'],
     \   'go': ['gofmt', 'go vet'],
-    \   'python': ['flake8','autopep8'],
+    \   'python': ['autopep8','flake8'],
     \   'proto': ['protoc-gen-lint'],
     \   'rust': ['cargo', 'rls', 'rustc', 'rustfmt'],
     \   'zsh': ['shell'],
     \}
 " strict go linter
 "\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
+let g:ale_close_preview_on_insert=1
 let g:ale_linters_explicit=1
 let g:ale_lint_delay=100
 let g:ale_lint_on_text_changed='normal'
@@ -132,10 +137,10 @@ let g:ale_completion_enabled=1
 let g:ale_completion_delay=100
 let g:ale_echo_delay=50
 let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
+let g:ale_python_flake8_options='--ignore=E501'
+let g:ale_python_autopep8_options='--ignore=E501'
 let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
 let g:ale_go_gofmt_options='-s'
-let g:ale_c_gcc_options='-Wall -O2'
-let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 let g:ale_c_gcc_options='-Wall -O2'
 let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 "====================================="
@@ -150,8 +155,9 @@ nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:ycm_show_diagnostics_ui=0
 let g:ycm_key_invoke_completion='<c-x>'
 let g:ycm_add_preview_to_completeopt=1
+let g:ycm_autoclose_preview_window_after_completion=0
 let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_min_num_identifier_candidate_chars=2
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_collect_identifiers_from_comments_and_strings=1
@@ -272,18 +278,20 @@ let g:go_fmt_fail_silently=1
 let g:go_def_reuse_buffer=1
 let g:go_def_mode='guru'
 let g:go_template_autocreate=0
-let g:go_guru_scope=["go.etcd.io/etcd"]`
+let g:go_guru_scope=["github.com/pingcap/tidb/..."]
+"" `let g:go_guru_scope=["go.etcd.io/etcd", "github.com/meitu/titan", "github.com/pingcap/tidb"]`
 noremap <silent> <leader>b :GoBuild<CR>
 noremap <silent> <leader>r :GoRun<CR>
 noremap <silent> <leader>t :GoAddTags<CR>
 noremap <silent> <leader>i :GoInstall<CR>
 noremap <silent> <leader>v :GoMetaLinter<CR>
-noremap <silent> <leader>k :GoDescribe<CR>
-noremap <silent> <leader>s :GoCallstack<CR>
-noremap <silent> <leader>c :GoCallers<CR>
+noremap <silent> <leader>a :GoDescribe<CR>
+noremap <silent> <leader>cs :GoCallstack<CR>
+noremap <silent> <leader>ca :GoCallers<CR>
 noremap <silent> <leader>ce :GoCallees<CR>
 noremap <silent> <leader>key :GoKeyify<CR>
 noremap <silent> <leader>doc :GoDocBrowser<CR>
+noremap <silent> <leader>imp :GoImplements<CR>
 noremap <silent> <leader>test :GoTest<CR>
 noremap <silent> <leader>peer :GoChannelPeers<CR>
 noremap <silent> <leader>free :GoFreevars<CR>
