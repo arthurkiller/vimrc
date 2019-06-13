@@ -1,8 +1,10 @@
 all: prepare
+	./install.sh -i
 	vim -c ':PlugInstall'
 
+help:
+	./install.sh -h
 
 prepare:
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	./install.sh -b
-	./install.sh -i
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
