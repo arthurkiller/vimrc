@@ -21,7 +21,7 @@ set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=manual
-set colorcolumn=100 
+set colorcolumn=120 
 set maxmempattern=10000
 set tags=./.tags;,.tags
 
@@ -40,7 +40,7 @@ let mapleader=";"
 set clipboard=unnamed
 
 " add title
-nmap <leader>aa :call AddAuthor()<CR>'S
+nnoremap <leader>aa :call AddAuthor()<CR>'S
 
 " set vim paset mode
 nnoremap <S-tab> :cclose <CR>
@@ -61,6 +61,107 @@ let g:indent_guides_auto_colors=0
 nmap <silent> <leader>hide :IndentGuidesToggle<CR>
 hi IndentGuidesOdd  ctermbg=232
 hi IndentGuidesEven ctermbg=233
+"====================================="
+
+" ale settings
+set completeopt=menu,menuone,preview,noselect,noinsert
+set omnifunc=ale#completion#OmniFunc
+nmap <silent> <leader>d :ALEDetail<CR>
+nmap <silent> sn <Plug>(ale_next_wrap)
+nmap <silent> sp <Plug>(ale_previous_wrap)
+nmap <silent> gd <Plug>(ale_go_to_definition)
+nmap <silent> gr <Plug>(ale_find_reference)
+let g:ale_linters={
+    \   'c': ['gcc', 'clang'],
+    \   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
+    \   'csh': ['shell'],
+    \   'go': ['gopls', 'golangci-lint'],
+    \   'python': ['autopep8','flake8'],
+    \   'proto': ['protoc-gen-lint'],
+    \   'rust': ['cargo', 'rls', 'rustc', 'rustfmt'],
+    \   'zsh': ['shell'],
+    \}
+let g:ale_set_balloons=1
+let g:ale_close_preview_on_insert=1
+let g:ale_linters_explicit=1
+let g:ale_lint_delay=100
+let g:ale_lint_on_text_changed='normal'
+let g:ale_lint_on_insert_leave=1
+let g:ale_lint_on_enter=1
+let g:ale_lint_on_save=1
+let g:ale_sign_error='✗✗'
+let g:ale_sign_warning='??'
+let g:ale_completion_enabled=1
+let g:ale_completion_delay=50
+let g:ale_cursor_detail=0
+let g:ale_echo_delay=50
+let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
+let g:ale_python_flake8_options='--ignore=E501'
+let g:ale_python_autopep8_options='--ignore=E501'
+let g:ale_go_gopls_executable='/Users/arthur/golang/bin/gopls'
+let g:ale_go_gofmt_options='-s'
+let g:ale_go_golangci_lint_options='--enable-all -D=gochecknoglobals,gochecknoinits,typecheck'
+let g:ale_c_gcc_options='-Wall -O2'
+let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
+let g:ale_c_cppcheck_options='-I /Users/arthur/redis-5.0.4/src -I /Users/arthur/redis-5.0.4/deps'
+let g:ale_c_parse_makefile=1
+let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
+"====================================="
+
+" vim-go settings
+let g:go_get_update=0
+let g:go_list_height=7
+let g:go_list_autoclose=1
+let g:go_list_type="locationlist"
+let g:go_list_type_commands={"GoBuild": "quickfix"}
+let g:go_highlight_array_whitespace_error=1
+let g:go_highlight_build_constraints=1
+let g:go_highlight_chan_whitespace_error=1
+let g:go_highlight_extra_types=1
+let g:go_highlight_fields=1
+let g:go_highlight_functions=1
+let g:go_highlight_function_calls=1
+let g:go_highlight_function_arguments=1
+let g:go_highlight_methods=1
+let g:go_highlight_operators=1
+let g:go_highlight_string_spellcheck=1
+let g:go_highlight_space_tab_error=1
+let g:go_highlight_types=1
+let g:go_highlight_trailing_whitespace_error=1
+let g:go_fmt_command="goimports"
+let g:go_fmt_autosave=1
+let g:go_fmt_fail_silently=1
+let g:go_def_mapping_enabled=0
+let g:go_def_reuse_buffer=1
+let g:go_def_mode='guru'
+let g:go_template_autocreate=0
+noremap <silent> <leader>b :GoBuild<CR> "noremap <silent> <leader>r :GoRun<CR>
+noremap <silent> <leader>t :GoAddTags<CR>
+noremap <silent> <leader>i :GoInstall<CR>
+noremap <silent> <leader>v :GoMetaLinter<CR>
+noremap <silent> <leader>a :GoDescribe<CR>
+noremap <silent> <leader>cs :GoCallstack<CR>
+noremap <silent> <leader>ca :GoCallers<CR>
+noremap <silent> <leader>ce :GoCallees<CR>
+noremap <silent> <leader>key :GoKeyify<CR>
+noremap <silent> <leader>doc :GoDocBrowser<CR>
+noremap <silent> <leader>imp :GoImplements<CR>
+noremap <silent> <leader>test :GoTest<CR>
+noremap <silent> <leader>peer :GoChannelPeers<CR>
+noremap <silent> <leader>free :GoFreevars<CR>
+au BufRead,BufNewFile *.go set filetype=go
+"====================================="
+
+" vim-cpp-enhanced-highlight
+let g:cpp_concepts_highlight=1
+let g:cpp_class_decl_highlight=1
+let g:cpp_no_function_highlight=1
+let g:cpp_class_scope_highlight=1
+let g:cpp_member_variable_highlight=1
+"====================================="
+
+" rust.vim 
+let g:rustfmt_autosave=1
 "====================================="
 
 " auto pair the symble
@@ -102,101 +203,12 @@ let g:gutentags_ctags_tagfile='.tags'
 let s:vim_tags=expand('~/.cache/tags')
 let g:gutentags_cache_dir=s:vim_tags
 let g:gutentags_ctags_extra_args=['--fields=+niazS', '--extra=+q', '--c++-kinds=+px', '--c-kinds=+px']
-let g:gutentags_auto_add_gtags_cscope = 0
+let g:gutentags_auto_add_gtags_cscope = 1
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
 "====================================="
 
-" ale settings
-nmap <silent> <leader>d :ALEDetail<CR>
-nmap <silent> sn <Plug>(ale_next_wrap)
-nmap <silent> sp <Plug>(ale_previous_wrap)
-let g:ale_linters={
-    \   'c': ['gcc', 'clang'],
-    \   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
-    \   'csh': ['shell'],
-    \   'go': ['gofmt', 'go vet'],
-    \   'python': ['autopep8','flake8'],
-    \   'proto': ['protoc-gen-lint'],
-    \   'rust': ['cargo', 'rls', 'rustc', 'rustfmt'],
-    \   'zsh': ['shell'],
-    \}
-" strict go linter
-"\'go': ['gofmt', 'go vet', 'gometalinter', 'golint']}
-let g:ale_close_preview_on_insert=1
-let g:ale_linters_explicit=1
-let g:ale_lint_delay=100
-let g:ale_lint_on_text_changed='normal'
-let g:ale_lint_on_insert_leave=1
-let g:ale_lint_on_enter=1
-let g:ale_lint_on_save=1
-let g:ale_sign_error='✗✗'
-let g:ale_sign_warning='??'
-let g:ale_completion_enabled=1
-let g:ale_completion_delay=100
-let g:ale_echo_delay=50
-let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
-let g:ale_python_flake8_options='--ignore=E501'
-let g:ale_python_autopep8_options='--ignore=E501'
-let g:ale_go_gometalinter_options='--fast -t --errors --enable-gc'
-let g:ale_go_gofmt_options='-s'
-let g:ale_c_gcc_options='-Wall -O2'
-let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
-"====================================="
-
-" YCM settings
-set completeopt-=preview
-set completeopt=menu,menuone
-nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"let g:ycm_log_level = 'debug'
-"let g:ycm_server_use_vim_stdout = 0
-"let g:ycm_server_keep_logfiles = 1
-"let g:ycm_show_diagnostics_ui=0
-let g:ycm_key_invoke_completion='<c-x>'
-let g:ycm_add_preview_to_completeopt=1
-let g:ycm_autoclose_preview_window_after_completion=0
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_min_num_of_chars_for_completion=1
-let g:ycm_min_num_identifier_candidate_chars=2
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_collect_identifiers_from_comments_and_strings=1
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_complete_mn_comments=1
-let g:ycm_complete_in_strings=1
-let g:ycm_confirm_extra_conf=0
-let g:ycm_enable_diagnostic_signs=1
-let g:ycm_enable_diagnostic_highlighting=1
-let g:ycm_register_as_syntastic_checker=1
-let g:ycm_python_interpreter_path = '/usr/local/bin/python'
-let g:ycm_python_sys_path = [
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python27.zip',
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7', 
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin', 
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac', 
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages', 
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk', 
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old', 
-  \  '/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload', 
-  \  '/usr/local/Cellar/protobuf/3.6.1.1/libexec/lib/python2.7/site-packages',
-  \  '/usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python37.zip',
-  \  '/usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python3.7', 
-  \  '/usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload', 
-  \  '/usr/local/lib/python2.7/site-packages',
-  \  '/usr/local/lib/python3.7/site-packages',
-  \  '/Users/arthur/Library/Python/2.7/lib/python/site-packages', 
-  \  '/Users/arthur/Library/Python/3.7/lib/python/site-packages' 
-  \]
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-noremap <c-x> <NOP>
-let g:ycm_global_ycm_extra_conf='~/.vim/ycm-plugin/ycm_extra_conf.py'
-if filereadable(".ycm_extra_conf.py")
-    let g:ycm_global_ycm_extra_conf='./.ycm_extra_conf.py'
-endif
-"====================================="
 
 " vim-airline settings
 set laststatus=2
@@ -216,6 +228,7 @@ let g:airline#extensions#tagbar#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#fugitiveline#enabled=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
+nmap <silent> <leader>0 <Plug>AirlineSelectTab0
 nmap <silent> <leader>1 <Plug>AirlineSelectTab1
 nmap <silent> <leader>2 <Plug>AirlineSelectTab2
 nmap <silent> <leader>3 <Plug>AirlineSelectTab3
@@ -225,7 +238,6 @@ nmap <silent> <leader>6 <Plug>AirlineSelectTab6
 nmap <silent> <leader>7 <Plug>AirlineSelectTab7
 nmap <silent> <leader>8 <Plug>AirlineSelectTab8
 nmap <silent> <leader>9 <Plug>AirlineSelectTab9
-nmap <silent> <leader>0 <Plug>AirlineSelectTab0
 "====================================="
 
 " NERDTree
@@ -252,51 +264,6 @@ let g:gitgutter_signs=0
 nmap <silent> <leader>g :GitGutterSignsToggle<CR>
 "====================================="
 
-" vim-go settings
-let g:go_get_update=0
-let g:go_list_height=7
-let g:go_list_autoclose=1
-let g:go_list_type="locationlist"
-let g:go_list_type_commands={"GoBuild": "quickfix"}
-let g:go_highlight_array_whitespace_error=1
-let g:go_highlight_build_constraints=1
-let g:go_highlight_chan_whitespace_error=1
-let g:go_highlight_extra_types=1
-let g:go_highlight_fields=1
-let g:go_highlight_functions=1
-let g:go_highlight_function_calls=1
-let g:go_highlight_function_arguments=1
-let g:go_highlight_methods=1
-let g:go_highlight_operators=1
-let g:go_highlight_string_spellcheck=1
-let g:go_highlight_space_tab_error=1
-let g:go_highlight_types=1
-let g:go_highlight_trailing_whitespace_error=1
-let g:go_fmt_command="goimports"
-let g:go_fmt_autosave=1
-let g:go_fmt_fail_silently=1
-let g:go_def_reuse_buffer=1
-let g:go_def_mode='guru'
-let g:go_template_autocreate=0
-let g:go_guru_scope=["github.com/pingcap/tidb/..."]
-"" `let g:go_guru_scope=["go.etcd.io/etcd", "github.com/meitu/titan", "github.com/pingcap/tidb"]`
-noremap <silent> <leader>b :GoBuild<CR>
-noremap <silent> <leader>r :GoRun<CR>
-noremap <silent> <leader>t :GoAddTags<CR>
-noremap <silent> <leader>i :GoInstall<CR>
-noremap <silent> <leader>v :GoMetaLinter<CR>
-noremap <silent> <leader>a :GoDescribe<CR>
-noremap <silent> <leader>cs :GoCallstack<CR>
-noremap <silent> <leader>ca :GoCallers<CR>
-noremap <silent> <leader>ce :GoCallees<CR>
-noremap <silent> <leader>key :GoKeyify<CR>
-noremap <silent> <leader>doc :GoDocBrowser<CR>
-noremap <silent> <leader>imp :GoImplements<CR>
-noremap <silent> <leader>test :GoTest<CR>
-noremap <silent> <leader>peer :GoChannelPeers<CR>
-noremap <silent> <leader>free :GoFreevars<CR>
-au BufRead,BufNewFile *.go set filetype=go
-"====================================="
 
 " LeaderF settings
 noremap <silent> <c-p> :LeaderfMruCwd<CR>
@@ -311,14 +278,3 @@ let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
 "====================================="
 
-" vim-cpp-enhanced-highlight
-let g:cpp_concepts_highlight=1
-let g:cpp_class_decl_highlight=1
-let g:cpp_no_function_highlight=1
-let g:cpp_class_scope_highlight=1
-let g:cpp_member_variable_highlight=1
-"====================================="
-
-" rust.vim 
-let g:rustfmt_autosave=1
-"====================================="

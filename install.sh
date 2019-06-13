@@ -4,14 +4,32 @@
 trap exit ERR
 pwd=`pwd`
 
-if [ "$1" == "-h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ]
-then
-    echo "USAGE:"
-    echo "  install             install pulgin"
-    echo "  install -h          show this help"
-    exit
-fi
+function usage(){
+cat << EOF
+  USAGE:
+    install.sh -i          install pulgin
+    install.sh -c          cleanup .vimrc and plugins
+    install.sh -b          backup .vim directory and .vimrc configs
+    install.sh -h          show help information
+EOF
+exit 1
+}
 
+while getopts 'i:b:c:h' opt ; do
+    case $opt in
+    i) install ;;
+    b) backup ;;
+    c) clean ;;
+    h) usage ;;
+    *) usage ;;
+    esac
+done
+
+function backup(){
+if [ -d $HOME/.vim ]
+then
+    mv $HOME/.vim $HOME/.vim.bak
+fi
 if [ -e $HOME/.vimrc ]
 then
     mv $HOME/.vimrc $HOME/.vimrc.bak
@@ -20,31 +38,32 @@ if [ -e $HOME/.vimrc.plug ]
 then
     mv $HOME/.vimrc.plug $HOME/.vimrc.plug.bak
 fi
+if [ -e $HOME/.vimrc.sign]
+then
+    mv $HOME/.vimrc.sign $HOME/.vimrc.sign.bak
+fi
+}
 
+
+function clean(){
+if [ -d $HOME/.vim ]
+then
+    rm -rf  $HOME/.vim
+fi
 if [ -h $HOME/.vimrc ]
 then
     rm $HOME/.vimrc
 fi
-ln -s $pwd/vimrc $HOME/.vimrc
-
 if [ -h $HOME/.vimrc.plug ]
 then
     rm $HOME/.vimrc.plug
 fi
-ln -s $pwd/vimrc.plug $HOME/.vimrc.plug
+}
 
-if [ -d "$HOME/.vim" ]
-then
-    mv $HOME/.vim $HOME/.vim.bak
-fi
-if [ -h "$HOME/.vim" ]
-then
-    rm -rf $HOME/.vim
-fi
+function install(){
+ln -s $pwd/vimrc $HOME/.vimrc
+ln -s $pwd/vimrc.plug $HOME/.vimrc.plug
 mkdir -p $HOME/.vim/autoload
 ln -s $pwd/colors $HOME/.vim/colors
 ln -s $pwd/ycm-plugin $HOME/.vim/ycm-plugin
-
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-echo Done! `date`
+}
