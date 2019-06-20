@@ -11,7 +11,6 @@ endif
 set nu
 set hlsearch
 set incsearch
-set nocompatible
 set expandtab
 set smartindent
 set smartcase
@@ -22,12 +21,11 @@ set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=manual
 set colorcolumn=120 
-set maxmempattern=10000
-set tags=./.tags;,.tags
-
 syntax on
 filetype on
 filetype indent on
+filetype plugin on
+filetype plugin indent on
 
 " set colorscheme
 colorscheme molokai
@@ -47,6 +45,10 @@ nnoremap <S-tab> :cclose <CR>
 nnoremap <leader>ps :set paste<CR>
 nnoremap <leader>nps :set nopaste<CR>
 
+" ser tab for completion
+inoremap <silent><expr> <Tab>
+    \ pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " remember the cursor last open
 " if takes no efforts, possible problem is that some files you DO NOT have access promession
 autocmd BufReadPost *
@@ -64,43 +66,43 @@ hi IndentGuidesEven ctermbg=233
 "====================================="
 
 " ale settings
-set completeopt=menu,menuone,preview,noselect,noinsert
 set omnifunc=ale#completion#OmniFunc
 nmap <silent> <leader>d :ALEDetail<CR>
 nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
 nmap <silent> gd <Plug>(ale_go_to_definition)
-nmap <silent> gr <Plug>(ale_find_reference)
+nmap <silent> gr <Plug>(ale_find_references)
+nmap <silent> gk <Plug>(ale_hover)
 let g:ale_linters={
-    \   'c': ['gcc', 'clang'],
-    \   'cpp': ['gcc', 'clang', 'g++', 'clang++'],
-    \   'csh': ['shell'],
-    \   'go': ['gopls', 'golangci-lint'],
+    \   'go': ['golangci-lint','gopls'],
     \   'python': ['autopep8','flake8'],
     \   'proto': ['protoc-gen-lint'],
-    \   'rust': ['cargo', 'rls', 'rustc', 'rustfmt'],
+    \   'c': ['gcc', 'clangd'],
+    \   'cpp': ['gcc', 'clangd', 'g++', 'clang++'],
+    \   'csh': ['shell'],
     \   'zsh': ['shell'],
     \}
-let g:ale_set_balloons=1
+let g:ale_completion_enabled=1
+let g:ale_completion_delay=500
+let g:ale_completion_max_suggestions=10
+let g:ale_set_balloons=0
+let g:ale_cursor_detail=0
 let g:ale_close_preview_on_insert=1
 let g:ale_linters_explicit=1
-let g:ale_lint_delay=100
+let g:ale_lint_delay=500
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
 let g:ale_sign_error='✗✗'
 let g:ale_sign_warning='??'
-let g:ale_completion_enabled=1
-let g:ale_completion_delay=50
-let g:ale_cursor_detail=0
-let g:ale_echo_delay=50
+let g:ale_echo_delay=500
 let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
 let g:ale_python_flake8_options='--ignore=E501'
 let g:ale_python_autopep8_options='--ignore=E501'
-let g:ale_go_gopls_executable='/Users/arthur/golang/bin/gopls'
 let g:ale_go_gofmt_options='-s'
-let g:ale_go_golangci_lint_options='--enable-all -D=gochecknoglobals,gochecknoinits,typecheck'
+let g:ale_go_golangci_lint_options='--enable-all -D=gochecknoglobals,gochecknoinits,typecheck misspell'
+let g:ale_c_clangd_executable='/usr/local/opt/llvm/bin/clangd'
 let g:ale_c_gcc_options='-Wall -O2'
 let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
 let g:ale_c_cppcheck_options='-I /Users/arthur/redis-5.0.4/src -I /Users/arthur/redis-5.0.4/deps'
@@ -109,6 +111,8 @@ let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu
 "====================================="
 
 " vim-go settings
+let g:go_code_completion_enabled=0
+let g:go_def_mapping_enabled=0
 let g:go_get_update=0
 let g:go_list_height=7
 let g:go_list_autoclose=1
@@ -131,9 +135,6 @@ let g:go_highlight_trailing_whitespace_error=1
 let g:go_fmt_command="goimports"
 let g:go_fmt_autosave=1
 let g:go_fmt_fail_silently=1
-let g:go_def_mapping_enabled=0
-let g:go_def_reuse_buffer=1
-let g:go_def_mode='guru'
 let g:go_template_autocreate=0
 noremap <silent> <leader>b :GoBuild<CR> "noremap <silent> <leader>r :GoRun<CR>
 noremap <silent> <leader>t :GoAddTags<CR>
@@ -209,7 +210,6 @@ if !isdirectory(s:vim_tags)
 endif
 "====================================="
 
-
 " vim-airline settings
 set laststatus=2
 nmap <silent> <tab> :bn<CR>
@@ -264,7 +264,6 @@ let g:gitgutter_signs=0
 nmap <silent> <leader>g :GitGutterSignsToggle<CR>
 "====================================="
 
-
 " LeaderF settings
 noremap <silent> <c-p> :LeaderfMruCwd<CR>
 let g:Lf_ShortcutF = '<C-F>'
@@ -277,4 +276,3 @@ let g:Lf_ShowRelativePath=0
 let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
 "====================================="
-
