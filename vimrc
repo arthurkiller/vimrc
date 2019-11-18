@@ -20,12 +20,13 @@ set tabstop=4
 set backspace=indent,eol,start
 set t_Co=256
 set foldmethod=manual
-set colorcolumn=120 
+set colorcolumn=120
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
 filetype plugin indent on
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 " set colorscheme
 colorscheme molokai
@@ -38,14 +39,14 @@ let mapleader=";"
 set clipboard=unnamed
 
 " add title
-nnoremap <leader>aa :call AddAuthor()<CR>'S
+nnoremap <leader>ti :call AddAuthor()<CR>'S
 
 " set vim paset mode
 nnoremap <S-tab> :cclose <CR>
 nnoremap <leader>ps :set paste<CR>
 nnoremap <leader>nps :set nopaste<CR>
 
-" ser tab for completion
+" set tab for completion
 inoremap <silent><expr> <Tab>
     \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -68,23 +69,34 @@ hi IndentGuidesEven ctermbg=233
 " ale settings
 set omnifunc=ale#completion#OmniFunc
 nmap <silent> <leader>d :ALEDetail<CR>
-nmap <silent> sn <Plug>(ale_next_wrap)
-nmap <silent> sp <Plug>(ale_previous_wrap)
 nmap <silent> gd <Plug>(ale_go_to_definition)
 nmap <silent> gr <Plug>(ale_find_references)
 nmap <silent> gk <Plug>(ale_hover)
+nmap <silent> sn <Plug>(ale_next_wrap)
+nmap <silent> sp <Plug>(ale_previous_wrap)
+
 let g:ale_linters={
-    \   'go': ['golangci-lint','gopls'],
-    \   'python': ['autopep8','flake8'],
+    \   'go': ['gopls'],
+    \   'python': ['autopep8', 'flake8', 'pylint'],
     \   'proto': ['protoc-gen-lint'],
-    \   'c': ['gcc', 'clangd'],
-    \   'cpp': ['gcc', 'clangd', 'g++', 'clang++'],
+    \   'c': ['clang', 'clangd'],
+    \   'cpp': ['clang++', 'clangd' ],
+    \   'php': ['phpcs', 'phpcbf'],
     \   'csh': ['shell'],
     \   'zsh': ['shell'],
     \}
+let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'cpp': ['clangtidy'],
+    \   'shell': ['shell'],
+    \   'php': ['phpcbf'],
+    \   'python': ['yapf'],
+    \}
+let g:ale_writegood_use_global = 1
+let g:ale_fix_on_save = 1
 let g:ale_completion_enabled=1
-let g:ale_completion_delay=500
-let g:ale_completion_max_suggestions=10
+let g:ale_completion_delay=300
+let g:ale_completion_max_suggestions=20
 let g:ale_set_balloons=0
 let g:ale_cursor_detail=0
 let g:ale_close_preview_on_insert=1
@@ -95,20 +107,17 @@ let g:ale_lint_on_insert_leave=1
 let g:ale_lint_on_enter=1
 let g:ale_lint_on_save=1
 let g:ale_sign_error='✗✗'
-let g:ale_sign_warning='??'
+let g:ale_sign_warning='ϟϟ'
 let g:ale_echo_delay=500
 let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
 let g:ale_python_flake8_options='--ignore=E501'
 let g:ale_python_autopep8_options='--ignore=E501'
+let g:ale_c_clangd_options='--query-driver=/usr/local/opt/llvm/include --all-scopes-completion --background-index -j=4'
+let g:ale_cpp_clangd_options='--query-driver=/usr/local/opt/llvm/include --all-scopes-completion --background-index -j=4'
 let g:ale_go_gofmt_options='-s'
-let g:ale_go_golangci_lint_options='--enable-all -D=gochecknoglobals,gochecknoinits,typecheck misspell'
-let g:ale_c_clangd_executable='/usr/local/opt/llvm/bin/clangd'
-let g:ale_c_gcc_options='-Wall -O2'
-let g:ale_cpp_gcc_options='-Wall -O2 -std=c++11'
-let g:ale_c_cppcheck_options='-I /Users/arthur/redis-5.0.4/src -I /Users/arthur/redis-5.0.4/deps'
+let g:ale_go_golangci_lint_options='--fast --fix'
+let g:ale_go_golangci_lint_package=1
 let g:ale_c_parse_makefile=1
-let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
-"====================================="
 
 " vim-go settings
 let g:go_code_completion_enabled=0
@@ -150,7 +159,6 @@ noremap <silent> <leader>imp :GoImplements<CR>
 noremap <silent> <leader>test :GoTest<CR>
 noremap <silent> <leader>peer :GoChannelPeers<CR>
 noremap <silent> <leader>free :GoFreevars<CR>
-au BufRead,BufNewFile *.go set filetype=go
 "====================================="
 
 " vim-cpp-enhanced-highlight
@@ -161,7 +169,7 @@ let g:cpp_class_scope_highlight=1
 let g:cpp_member_variable_highlight=1
 "====================================="
 
-" rust.vim 
+" rust.vim
 let g:rustfmt_autosave=1
 "====================================="
 
@@ -171,12 +179,14 @@ let g:AutoPairsFlyMode=0
 
 " auto format code with extention name of file
 let g:formatterpath=['/usr/local/bin']
-let g:formatdef_my_c='"astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header"'
+let g:formatdef_my_c="'astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header'"
+let g:formatdef_my_py= "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_cpp=['my_c']
 let g:formatters_c=['my_c']
+let g:formatters_python = ['my_py']
 let g:formatter_yapf_style = 'pep8'
-noremap <silent> <F8> :Autoformat<CR>
-au BufWrite *.c,*.cpp,*.h,*.hpp,*.py :Autoformat
+nmap <silent> <leader>fmt :Autoformat<CR>
+au BufWrite *.c,*.cpp,*.h,*.hpp,:Autoformat
 "====================================="
 
 " vim markdown
@@ -194,12 +204,12 @@ let g:vim_markdown_emphasis_multiline=0
 "====================================="
 
 " markdown preview tools
-nmap <silent> <F5> <Plug>MarkdownPreview
+nmap <silent> <leader>md <Plug>MarkdownPreview
 let g:mkdp_path_to_chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 "====================================="
 
 " vim-gutentags settings
-let g:gutentags_project_root=['Makefile', '.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_project_root=['Makefile']
 let g:gutentags_ctags_tagfile='.tags'
 let s:vim_tags=expand('~/.cache/tags')
 let g:gutentags_cache_dir=s:vim_tags
@@ -241,13 +251,13 @@ nmap <silent> <leader>9 <Plug>AirlineSelectTab9
 "====================================="
 
 " NERDTree
-nmap <silent> <F5> :NERDTreeMirror<CR>
-nmap <silent> <F5> :NERDTreeToggle<CR>
+nmap <silent> <leader>tree :NERDTreeMirror<CR>
+nmap <silent> <leader>tree :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "====================================="
 
 " TagBar
-nmap <silent> <F6> :TagbarToggle<CR>
+nmap <silent> <leader>tagbar :TagbarToggle<CR>
 let g:tagbar_width=40
 let g:tagbar_compact=1
 let g:tagbar_autofocus=1
@@ -275,4 +285,49 @@ let g:Lf_CacheDirectory=expand('~/.vim/cache')
 let g:Lf_ShowRelativePath=0
 let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
+"====================================="
+
+" dash
+nmap <silent> <leader>d <Plug>DashSearch
+"====================================="
+
+" rainbow pairs
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3']
+    \]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 1
+"====================================="
+
+" ack search
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+  let g:ack_default_options =
+              \ " -s -H --nocolor --nogroup --column --smart-case --follow"
+  let g:ackhighlight = 1
+  let g:ack_autoclose = 1
+  let g:ack_autofold_results = 1
+  let g:ackpreview = 1
+endif
 "====================================="
