@@ -118,6 +118,7 @@ let g:ale_go_gofmt_options='-s'
 let g:ale_go_golangci_lint_options='--fast --fix'
 let g:ale_go_golangci_lint_package=1
 let g:ale_c_parse_makefile=1
+let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
 
 " vim-go settings
 let g:go_code_completion_enabled=0
@@ -233,21 +234,33 @@ let g:airline#extensions#default#layout = [
     \ [ 'x', 'z', 'error', 'warning' ]
     \ ]
 let g:airline#extensions#ale#enabled=1
-let g:airline#extensions#ycm#enabled=1
+let g:airline#extensions#fugitiveline#enabled=1
+let g:airline#extensions#gutentags#enabled=1
 let g:airline#extensions#tagbar#enabled=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#fugitiveline#enabled=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
-nmap <silent> <leader>0 <Plug>AirlineSelectTab0
-nmap <silent> <leader>1 <Plug>AirlineSelectTab1
-nmap <silent> <leader>2 <Plug>AirlineSelectTab2
-nmap <silent> <leader>3 <Plug>AirlineSelectTab3
-nmap <silent> <leader>4 <Plug>AirlineSelectTab4
-nmap <silent> <leader>5 <Plug>AirlineSelectTab5
-nmap <silent> <leader>6 <Plug>AirlineSelectTab6
-nmap <silent> <leader>7 <Plug>AirlineSelectTab7
-nmap <silent> <leader>8 <Plug>AirlineSelectTab8
-nmap <silent> <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>0 <Plug>AirlineSelectTab0
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>10 <Plug>AirlineSelectTab10
+nmap <leader>11 <Plug>AirlineSelectTab11
+nmap <leader>12 <Plug>AirlineSelectTab12
+nmap <leader>13 <Plug>AirlineSelectTab13
+nmap <leader>14 <Plug>AirlineSelectTab14
+nmap <leader>15 <Plug>AirlineSelectTab15
+nmap <leader>16 <Plug>AirlineSelectTab16
+nmap <leader>17 <Plug>AirlineSelectTab17
+nmap <leader>18 <Plug>AirlineSelectTab18
+nmap <leader>19 <Plug>AirlineSelectTab19
+nmap <leader>< <Plug>AirlineSelectPrevTab
+nmap <leader>> <Plug>AirlineSelectNextTab
 "====================================="
 
 " NERDTree
