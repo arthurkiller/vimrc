@@ -39,7 +39,8 @@ let mapleader=";"
 set clipboard=unnamed
 
 " add title
-nnoremap <leader>ti :call AddAuthor()<CR>'S
+nnoremap <leader>ti :call AddTitle()<CR>'S
+nnoremap <leader>tu :call UpdateTitle()<CR>'S
 
 " set vim paset mode
 nnoremap <S-tab> :cclose <CR>
@@ -74,20 +75,19 @@ nmap <silent> gr <Plug>(ale_find_references)
 nmap <silent> gk <Plug>(ale_hover)
 nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
-
 let g:ale_linters={
     \   'go': ['gopls'],
     \   'python': ['autopep8', 'flake8', 'pylint'],
     \   'proto': ['protoc-gen-lint'],
-    \   'c': ['clang', 'clangd'],
-    \   'cpp': ['clang++', 'clangd' ],
+    \   'c': ['ccls'],
+    \   'cpp': ['ccls'],
     \   'php': ['phpcs', 'phpcbf'],
     \   'csh': ['shell'],
     \   'zsh': ['shell'],
     \}
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'cpp': ['clangtidy'],
+    \   'cpp': ['clangtidy', 'trim_whitespace'],
     \   'shell': ['shell'],
     \   'php': ['phpcbf'],
     \   'python': ['yapf'],
@@ -112,11 +112,30 @@ let g:ale_echo_delay=500
 let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
 let g:ale_python_flake8_options='--ignore=E501'
 let g:ale_python_autopep8_options='--ignore=E501'
-let g:ale_c_clangd_options='--query-driver=/usr/local/opt/llvm/include --all-scopes-completion --background-index -j=4'
-let g:ale_cpp_clangd_options='--query-driver=/usr/local/opt/llvm/include --all-scopes-completion --background-index -j=4'
+let g:ale_cpp_ccls_executable='/Users/arthur/ccls/Release/ccls'
+let g:ale_cpp_ccls_init_options= {
+    \   'cache': {
+    \       'directory': '/Users/arthur/.cache/ccls',
+    \       'cacheFormat': 'binary',
+    \   },
+    \   'diagnostics': {
+    \     'onOpen': 0,
+    \     'opChange': 1000,
+    \   },
+    \   'clang': {
+    \       'extraArgs': [
+	\			'-isystem', '/usr/local/opt/llvm/bin/../include/c++/v1',
+	\			'-isystem', '/usr/local/Cellar/llvm/9.0.1/lib/clang/9.0.1/include',
+	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include',
+	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)',
+    \       ],
+    \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/9.0.1',
+    \   },
+    \}
+let g:ale_cpp_cppcheck_options='--enable=style'
 let g:ale_go_gofmt_options='-s'
-let g:ale_go_golangci_lint_options='--fast --fix'
-let g:ale_go_golangci_lint_package=1
+"let g:ale_go_golangci_lint_options='--fast --fix'
+"let g:ale_go_golangci_lint_package=1
 let g:ale_c_parse_makefile=1
 let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
 
@@ -210,12 +229,12 @@ let g:mkdp_path_to_chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Goog
 "====================================="
 
 " vim-gutentags settings
-let g:gutentags_project_root=['Makefile']
+let g:gutentags_project_root=['.git', 'Makefile']
 let g:gutentags_ctags_tagfile='.tags'
+let g:gutentags_ctags_extra_args=['--fields=+niazS', '--extra=+q', '--c++-kinds=+px', '--c-kinds=+px', '--sort=yes']
+let g:gutentags_auto_add_gtags_cscope = 1
 let s:vim_tags=expand('~/.cache/tags')
 let g:gutentags_cache_dir=s:vim_tags
-let g:gutentags_ctags_extra_args=['--fields=+niazS', '--extra=+q', '--c++-kinds=+px', '--c-kinds=+px']
-let g:gutentags_auto_add_gtags_cscope = 1
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
@@ -249,16 +268,6 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>10 <Plug>AirlineSelectTab10
-nmap <leader>11 <Plug>AirlineSelectTab11
-nmap <leader>12 <Plug>AirlineSelectTab12
-nmap <leader>13 <Plug>AirlineSelectTab13
-nmap <leader>14 <Plug>AirlineSelectTab14
-nmap <leader>15 <Plug>AirlineSelectTab15
-nmap <leader>16 <Plug>AirlineSelectTab16
-nmap <leader>17 <Plug>AirlineSelectTab17
-nmap <leader>18 <Plug>AirlineSelectTab18
-nmap <leader>19 <Plug>AirlineSelectTab19
 nmap <leader>< <Plug>AirlineSelectPrevTab
 nmap <leader>> <Plug>AirlineSelectNextTab
 "====================================="
