@@ -1,8 +1,10 @@
+"NOTE regx did not work correctly
 function AddAuthor()
     let n=1
-    while n < 9
+    while n < 6
         let line = getline(n)
-        if line =~'^\s*\*\s*\S*Last\s*modified\s*:\s*\S*.*'
+        let str = '^.*Last modified.*$'
+        if line =~ str
             call UpdateTitle()
             return
         endif
@@ -13,24 +15,25 @@ endfunction
 
 function UpdateTitle()
     normal m'
-    execute '/* Last modified\s*:/s@:.*$@\=strftime(": %Y-%m-%d %H:%M")@'
+    execute '/# Last modified\s*:/s@:.*$@\=strftime(": %Y-%m-%d %H:%M")@'
     normal "
     normal mk
-    execute '/* Filename\s*:/s@:.*$@\=": ".expand("%:t")@'
+    execute '/# Filename\s*:/s@:.*$@\=": ".expand("%:t")@'
     execute "noh"
     normal 'k
     echohl WarningMsg | echo "Successful in updating the author information." | echohl None
-endfunction
+endfunction'
 
 function AddTitle()
-    call append(0,"# -*- coding: UTF-8 -*-")
+    call append(0,"#coding=utf-8")
     call append(1,"# /*********************************************************")
-    call append(2,"#  * Author        : ")
-    call append(3,"#  * Email         : ")
-    call append(4,"#  * Filename      : ".expand("%:t"))
-    call append(5,"#  * Create time   : ".strftime("%Y-%m-%d %H:%M"))
-    call append(6,"#  * Last modified : ".strftime("%Y-%m-%d %H:%M"))
-    call append(7,"#  * Description   : Copyright 2019 Inc. All rights reserved.")
-    call append(8,"#  *********************************************************/")
+    call append(2,"# Author        : liziang")
+    call append(3,"# Email         : liziang@baidu.com")
+    call append(4,"# Filename      : ".expand("%:t"))
+    call append(5,"# Create time   : ".strftime("%Y-%m-%d %H:%M"))
+    call append(6,"# Last modified : ".strftime("%Y-%m-%d %H:%M"))
+    call append(7,"# Description   : ")
+    call append(8,"# Copyright 2020 Baidu Inc. All rights reserved.")
+    call append(9,"# *********************************************************/")
     echohl WarningMsg | echo "Successful in adding the author information." | echohl None
 endfunction

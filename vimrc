@@ -76,7 +76,7 @@ nmap <silent> gk <Plug>(ale_hover)
 nmap <silent> sn <Plug>(ale_next_wrap)
 nmap <silent> sp <Plug>(ale_previous_wrap)
 let g:ale_linters={
-    \   'go': ['gopls'],
+    \   'go': ['gopls', 'golint'],
     \   'python': ['autopep8', 'flake8', 'pylint'],
     \   'proto': ['protoc-gen-lint'],
     \   'c': ['ccls'],
@@ -93,7 +93,7 @@ let g:ale_fixers = {
     \   'python': ['yapf'],
     \}
 let g:ale_writegood_use_global = 1
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save=1
 let g:ale_completion_enabled=1
 let g:ale_completion_delay=300
 let g:ale_completion_max_suggestions=20
@@ -132,6 +132,26 @@ let g:ale_cpp_ccls_init_options= {
     \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/9.0.1',
     \   },
     \}
+let g:ale_c_ccls_executable='/Users/arthur/ccls/Release/ccls'
+let g:ale_c_ccls_init_options= {
+    \   'cache': {
+    \       'directory': '/Users/arthur/.cache/ccls',
+    \       'cacheFormat': 'binary',
+    \   },
+    \   'diagnostics': {
+    \     'onOpen': 0,
+    \     'opChange': 1000,
+    \   },
+    \   'clang': {
+    \       'extraArgs': [
+	\			'-isystem', '/usr/local/opt/llvm/bin/../include/c++/v1',
+	\			'-isystem', '/usr/local/Cellar/llvm/9.0.1/lib/clang/9.0.1/include',
+	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include',
+	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)',
+    \       ],
+    \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/9.0.1',
+    \   },
+    \}
 let g:ale_cpp_cppcheck_options='--enable=style'
 let g:ale_go_gofmt_options='-s'
 "let g:ale_go_golangci_lint_options='--fast --fix'
@@ -140,6 +160,7 @@ let g:ale_c_parse_makefile=1
 let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
 
 " vim-go settings
+let g:go_gopls_enabled=0
 let g:go_code_completion_enabled=0
 let g:go_def_mapping_enabled=0
 let g:go_get_update=0
@@ -147,20 +168,23 @@ let g:go_list_height=7
 let g:go_list_autoclose=1
 let g:go_list_type="locationlist"
 let g:go_list_type_commands={"GoBuild": "quickfix"}
-let g:go_highlight_array_whitespace_error=1
-let g:go_highlight_build_constraints=1
-let g:go_highlight_chan_whitespace_error=1
-let g:go_highlight_extra_types=1
+let g:go_highlight_types=1
 let g:go_highlight_fields=1
+let g:go_highlight_extra_types=1
 let g:go_highlight_functions=1
-let g:go_highlight_function_calls=1
-let g:go_highlight_function_arguments=1
+let g:go_highlight_function_parameters=1
 let g:go_highlight_methods=1
 let g:go_highlight_operators=1
 let g:go_highlight_string_spellcheck=1
-let g:go_highlight_space_tab_error=1
-let g:go_highlight_types=1
+let g:go_highlight_chan_whitespace_error=1
+let g:go_highlight_array_whitespace_error=1
 let g:go_highlight_trailing_whitespace_error=1
+let g:go_highlight_build_constraints=1
+let g:go_highlight_generate_tags=1
+let g:go_highlight_space_tab_error=1
+let g:go_highlight_function_calls=1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 0
 let g:go_fmt_command="goimports"
 let g:go_fmt_autosave=1
 let g:go_fmt_fail_silently=1
@@ -199,7 +223,7 @@ let g:AutoPairsFlyMode=0
 
 " auto format code with extention name of file
 let g:formatterpath=['/usr/local/bin']
-let g:formatdef_my_c="'astyle --style=google --indent=force-tab --pad-oper --pad-comma --pad-header'"
+let g:formatdef_my_c="'astyle --mode=c --style=google --indent=space --pad-oper --pad-comma --pad-header --convert-tabs'"
 let g:formatdef_my_py= "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_cpp=['my_c']
 let g:formatters_c=['my_c']
