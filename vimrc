@@ -112,7 +112,6 @@ let g:ale_echo_delay=500
 let g:ale_echo_msg_format='[%severity%] [%linter%] %code: %%s'
 let g:ale_python_flake8_options='--ignore=E501'
 let g:ale_python_autopep8_options='--ignore=E501'
-let g:ale_cpp_ccls_executable='/Users/arthur/ccls/Release/ccls'
 let g:ale_cpp_ccls_init_options= {
     \   'cache': {
     \       'directory': '/Users/arthur/.cache/ccls',
@@ -124,15 +123,12 @@ let g:ale_cpp_ccls_init_options= {
     \   },
     \   'clang': {
     \       'extraArgs': [
-	\			'-isystem', '/usr/local/opt/llvm/bin/../include/c++/v1',
-	\			'-isystem', '/usr/local/Cellar/llvm/9.0.1/lib/clang/9.0.1/include',
-	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include',
-	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)',
+	\			'-isystem', '/usr/local/opt/llvm/include/c++/v1',
+	\			'-isystem', '/usr/local/Cellar/llvm/11.1.0/lib/clang/11.1.0/include',
     \       ],
-    \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/9.0.1',
+    \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/11.1.0',
     \   },
     \}
-let g:ale_c_ccls_executable='/Users/arthur/ccls/Release/ccls'
 let g:ale_c_ccls_init_options= {
     \   'cache': {
     \       'directory': '/Users/arthur/.cache/ccls',
@@ -144,20 +140,15 @@ let g:ale_c_ccls_init_options= {
     \   },
     \   'clang': {
     \       'extraArgs': [
-	\			'-isystem', '/usr/local/opt/llvm/bin/../include/c++/v1',
-	\			'-isystem', '/usr/local/Cellar/llvm/9.0.1/lib/clang/9.0.1/include',
-	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include',
-	\			'-isystem', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)',
+	\			'-isystem', '/usr/local/opt/llvm/include/c++/v1',
+	\			'-isystem', '/usr/local/Cellar/llvm/11.1.0/lib/clang/11.1.0/include',
     \       ],
-    \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/9.0.1',
+    \   	'resourceDir': '/usr/local/opt/llvm/lib/clang/11.1.0',
     \   },
     \}
-let g:ale_cpp_cppcheck_options='--enable=style'
 let g:ale_go_gofmt_options='-s'
-"let g:ale_go_golangci_lint_options='--fast --fix'
-"let g:ale_go_golangci_lint_package=1
 let g:ale_c_parse_makefile=1
-let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/golang/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
+"let g:ale_proto_protoc_gen_lint_options='-I /Users/arthur/codes/src/icode.baidu.com/baidu/bdrp/jarvis/grpc'
 
 " vim-go settings
 let g:go_gopls_enabled=0
@@ -351,15 +342,15 @@ let g:rbpt_colorpairs = [
     \ ['darkred',     'SeaGreen3'],
     \ ['darkmagenta', 'DarkOrchid3'],
     \ ['brown',       'firebrick3'],
-    \ ['black',       'SeaGreen3'],
     \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
     \ ['darkmagenta', 'DarkOrchid3'],
     \ ['Darkblue',    'firebrick3'],
     \ ['darkgreen',   'RoyalBlue3'],
     \ ['darkcyan',    'SeaGreen3'],
     \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3']
-    \]
+    \ ['red',         'firebrick3'],
+    \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 1
 "====================================="

@@ -25,7 +25,7 @@ function UpdateTitle()
 endfunction'
 
 function AddTitle()
-    call append(0,"#coding=utf-8")
+    call append(0,"# -*- coding:utf-8 -*-")
     call append(1,"# /*********************************************************")
     call append(2,"# Author        : liziang")
     call append(3,"# Email         : liziang@baidu.com")
