@@ -27,13 +27,13 @@ endfunction'
 function AddTitle()
     call append(0,"# -*- coding:utf-8 -*-")
     call append(1,"# /*********************************************************")
-    call append(2,"# Author        : liziang")
-    call append(3,"# Email         : liziang@baidu.com")
+    call append(2,"# Author        : ")
+    call append(3,"# Email         : ")
     call append(4,"# Filename      : ".expand("%:t"))
     call append(5,"# Create time   : ".strftime("%Y-%m-%d %H:%M"))
     call append(6,"# Last modified : ".strftime("%Y-%m-%d %H:%M"))
     call append(7,"# Description   : ")
-    call append(8,"# Copyright 2020 Baidu Inc. All rights reserved.")
+    call append(8,"# All rights reserved.")
     call append(9,"# *********************************************************/")
     echohl WarningMsg | echo "Successful in adding the author information." | echohl None
 endfunction
