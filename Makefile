@@ -8,9 +8,6 @@ help:
 	echo "make backup	backup .vim directory and .vimrc configs"
 	echo "make help 	show help information"
 
-prepare:
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 backup:
 	mv ${HOME}/.vim ${HOME}/.vim.bak
 	mv ${HOME}/.vimrc ${HOME}/.vimrc.bak
@@ -26,6 +23,6 @@ install:
 	ln -s ${pwd}/vimrc ${HOME}/.vimrc
 	ln -s ${pwd}/vimrc.plug ${HOME}/.vimrc.plug
 	ln -s ${pwd}/vimrc.sign ${HOME}/.vimrc.sign
-	mkdir -p ${HOME}/.vim/autoload
+	ln -s ${pwd}/autoload ${HOME}/.vim/autoload 
 	ln -s ${pwd}/colors ${HOME}/.vim/colors
 	vim -c ':PlugInstall'
