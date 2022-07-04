@@ -20,9 +20,10 @@ clean:
 	rm ${HOME}/.vimrc.plug
 
 install:
+	mkdir /.vim
 	ln -s ${pwd}/vimrc ${HOME}/.vimrc
 	ln -s ${pwd}/vimrc.plug ${HOME}/.vimrc.plug
 	ln -s ${pwd}/vimrc.sign ${HOME}/.vimrc.sign
-	ln -s ${pwd}/autoload ${HOME}/.vim/autoload 
+	ln -s ${pwd}/autoload ${HOME}/.vim/autoload
 	ln -s ${pwd}/colors ${HOME}/.vim/colors
 	vim -c ':PlugInstall'

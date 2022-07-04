@@ -5,12 +5,12 @@ call plug#begin('~/.vim/plugged')
 
 " Customed plugin at here
 "=====================================
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
-Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/tagbar'
 Plug 'dense-analysis/ale'
 Plug 'Chiel92/vim-autoformat'
 Plug 'jiangmiao/auto-pairs'
@@ -25,8 +25,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'mileszs/ack.vim'
-Plug 'rust-lang/rust.vim'
 Plug 'rizzatti/dash.vim'
+Plug 'rhysd/vim-grammarous'
+
 "=====================================
 
 " Initialize plugin system
